@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const DB_NAME = 'speaklab_audio_db';
+const DB_NAME = 'speakingclub_audio_db';
 const DB_VERSION = 1;
 const STORE_NAME = 'recordings';
 

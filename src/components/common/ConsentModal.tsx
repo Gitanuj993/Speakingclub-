@@ -51,7 +51,7 @@ export const ConsentModal: React.FC<ConsentModalProps> = ({
           <p className="text-xs text-[#201B18] dark:text-[#FFF9EF] leading-relaxed">
             In modern browsers (such as Google Chrome and Microsoft Edge), the built-in
             Web Speech API streams speech audio to the browser vendor’s speech servers
-            for real-time transcription. SpeakLab does not host, monetize, or retain this data.
+            for real-time transcription. SpeakingClub does not host, monetize, or retain this data.
           </p>
         </div>
 

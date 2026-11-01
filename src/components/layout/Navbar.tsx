@@ -49,7 +49,7 @@ export const Navbar: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-base tracking-tight text-[#201B18] dark:text-[#FFF9EF] font-serif leading-none">
-              SpeakLab
+              SpeakingClub
             </span>
             <span className="text-[10px] text-[#C66A18] dark:text-[#D4AF65] font-serif leading-tight tracking-wider uppercase mt-0.5">
               वाक् साधना

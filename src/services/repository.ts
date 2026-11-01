@@ -20,7 +20,8 @@ import {
 } from '../utils/xp';
 import { saveAudioBlob, deleteAudioBlob, clearAllAudioBlobs } from '../utils/idb';
 
-const STORAGE_KEY = 'speaklab_data_v1';
+const STORAGE_KEY = 'speakingclub_data_v1';
+const LEGACY_STORAGE_KEY = 'speaklab_data_v1';
 const CURRENT_SCHEMA_VERSION = 1;
 
 export const DEFAULT_PROFILE: UserProfile = {
@@ -97,14 +98,14 @@ export class LocalRepository implements IRepository {
     }
 
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (!raw) {
         return INITIAL_STORED_DATA;
       }
       const parsed = JSON.parse(raw);
       return this.migrateSchema(parsed);
     } catch (err) {
-      console.error('Failed to parse SpeakLab localStorage:', err);
+      console.error('Failed to parse SpeakingClub localStorage:', err);
       return INITIAL_STORED_DATA;
     }
   }
@@ -380,7 +381,7 @@ export class LocalRepository implements IRepository {
       if (typeof parsed.schemaVersion !== 'number') {
         return {
           success: false,
-          error: 'Missing schemaVersion in import file. Not a valid SpeakLab backup.',
+          error: 'Missing schemaVersion in import file. Not a valid SpeakingClub backup.',
         };
       }
       const migrated = this.migrateSchema(parsed);
@@ -398,6 +399,7 @@ export class LocalRepository implements IRepository {
     try {
       await clearAllAudioBlobs();
       localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
       this.cache = { ...INITIAL_STORED_DATA };
     } catch (err) {
       console.error('Reset error:', err);

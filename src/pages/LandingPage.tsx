@@ -280,7 +280,7 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
           <Badge variant="gold" size="sm">Dharma of Communication</Badge>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#201B18] dark:text-[#FFF9EF] mt-2 font-serif">
-            Why Students & Engineers Excel With SpeakLab
+            Why Students & Engineers Excel With SpeakingClub
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8 text-left">
             <div className="p-4 rounded-xl bg-[#FFF9EF] dark:bg-[#201B18] border border-[#E8D5B5] dark:border-[#3D352F] shadow-xs">

@@ -9,7 +9,7 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     id: 'first-recording',
     title: 'First Recording',
-    description: 'Complete your first practice recording session in SpeakLab.',
+    description: 'Complete your first practice recording session in SpeakingClub.',
     icon: 'Mic',
     unlockedAt: null,
     progress: 0,

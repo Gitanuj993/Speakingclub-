@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
                 ॐ
               </div>
               <span className="font-extrabold text-base text-[#201B18] dark:text-[#FFF9EF] font-serif">
-                SpeakLab
+                SpeakingClub
               </span>
               <span className="text-[11px] text-[#C66A18] dark:text-[#D4AF65] font-serif ml-1">
                 वाक् साधना
@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#6B5E55] dark:text-[#B8A89A]">
-          <p>© {new Date().getFullYear()} SpeakLab. Dedicated to authentic voice mastery.</p>
+          <p>© {new Date().getFullYear()} SpeakingClub. Dedicated to authentic voice mastery.</p>
           <p className="flex items-center gap-1">
             Built with sacred attention to clarity & truth <Heart className="w-3 h-3 text-[#C64B32] fill-[#C64B32] inline" />
           </p>
