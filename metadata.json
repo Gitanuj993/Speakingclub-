@@ -1,0 +1,10 @@
+{
+  "name": "SpeakLab",
+  "description": "Speak clearly. Think confidently. Interview better. Structured speaking and interview practice for college students and job seekers.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
