@@ -96,12 +96,14 @@ export const ProgressPage: React.FC = () => {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <Badge variant="primary" size="sm">Real Analytics Only</Badge>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+          <div className="flex items-center gap-2 mb-1">
+            <Badge variant="gold" size="sm">साधना प्रगति • Real Vocal Analytics</Badge>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] tracking-tight mt-1">
             Speaking Progress & Data Studio
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Grounded directly in stored audio attempts and measurable timing data. Zero fabricated scores.
+          <p className="text-xs sm:text-sm text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-1">
+            Grounded directly in stored audio attempts and measurable timing data. Zero fabricated metrics.
           </p>
         </div>
 
@@ -117,72 +119,72 @@ export const ProgressPage: React.FC = () => {
 
       {/* Core KPI Metrics Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card padding="md">
+        <Card padding="md" className="border-[#E8D5B5] dark:border-[#3D352F]">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-500 font-medium">Practice Time</span>
-            <Clock className="w-4 h-4 text-indigo-500" />
+            <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">कुल साधना काल (Time)</span>
+            <Clock className="w-4 h-4 text-[#C66A18] dark:text-[#E68A24]" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-extrabold font-mono text-slate-900 dark:text-white">
+            <div className="text-2xl font-serif font-extrabold text-[#201B18] dark:text-[#FFF9EF]">
               {Math.floor(totalPracticeTimeSeconds / 60)}m {totalPracticeTimeSeconds % 60}s
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">Total vocal practice</p>
+            <p className="text-[11px] text-[#722F37]/75 dark:text-[#E8D5B5]/70 mt-0.5">Total vocal practice</p>
           </div>
         </Card>
 
-        <Card padding="md">
+        <Card padding="md" className="border-[#E8D5B5] dark:border-[#3D352F]">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-500 font-medium">Completed Drills</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">सिद्ध अभ्यास (Completed)</span>
+            <CheckCircle2 className="w-4 h-4 text-[#77764B] dark:text-[#D4AF65]" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-extrabold font-mono text-slate-900 dark:text-white">
+            <div className="text-2xl font-serif font-extrabold text-[#201B18] dark:text-[#FFF9EF]">
               {totalExercisesCompleted}
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">Distinct exercises</p>
+            <p className="text-[11px] text-[#722F37]/75 dark:text-[#E8D5B5]/70 mt-0.5">Distinct exercises</p>
           </div>
         </Card>
 
-        <Card padding="md">
+        <Card padding="md" className="border-[#E8D5B5] dark:border-[#3D352F]">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-500 font-medium">Streak Integrity</span>
-            <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
+            <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">अखंड साधना (Streak)</span>
+            <Flame className="w-4 h-4 text-[#C66A18] fill-[#C66A18] dark:text-[#E68A24] dark:fill-[#E68A24]" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-extrabold font-mono text-slate-900 dark:text-white">
-              {data.streak.current} <span className="text-xs font-normal text-slate-400">/ {data.streak.longest} max</span>
+            <div className="text-2xl font-serif font-extrabold text-[#201B18] dark:text-[#FFF9EF]">
+              {data.streak.current} <span className="text-xs font-normal text-[#722F37] dark:text-[#E8D5B5]">/ {data.streak.longest} max</span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">Consecutive calendar days</p>
+            <p className="text-[11px] text-[#722F37]/75 dark:text-[#E8D5B5]/70 mt-0.5">Consecutive calendar days</p>
           </div>
         </Card>
 
-        <Card padding="md">
+        <Card padding="md" className="border-[#E8D5B5] dark:border-[#3D352F]">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-500 font-medium">Total XP & Level</span>
-            <Zap className="w-4 h-4 text-indigo-500" />
+            <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">स्तर एवं अनुभव (XP)</span>
+            <Zap className="w-4 h-4 text-[#D4AF65]" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-extrabold font-mono text-slate-900 dark:text-white">
+            <div className="text-2xl font-serif font-extrabold text-[#201B18] dark:text-[#FFF9EF]">
               Lvl {data.level}
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">{data.xp} cumulative XP</p>
+            <p className="text-[11px] text-[#722F37]/75 dark:text-[#E8D5B5]/70 mt-0.5">{data.xp} cumulative XP</p>
           </div>
         </Card>
       </div>
 
-      {/* 7-Day Activity Chart (Hand-crafted SVG / CSS, screen-reader accessible) */}
-      <Card padding="lg" className="border-slate-200 dark:border-slate-800 space-y-4">
+      {/* 7-Day Activity Chart */}
+      <Card padding="lg" className="border-[#E8D5B5] dark:border-[#3D352F] space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <h2 className="text-base font-bold text-slate-900 dark:text-white">
-              Weekly Practice Frequency (Last 7 Days)
+            <h2 className="text-base font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
+              साप्ताहिक अभ्यास चक्र (Last 7 Days Activity)
             </h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#722F37]/80 dark:text-[#E8D5B5]/80">
               Exercises and interview responses recorded per calendar day.
             </p>
           </div>
-          <span className="text-xs text-slate-400 font-mono">
-            {last7DaysData.reduce((sum, d) => sum + d.count, 0)} total activities this week
+          <span className="text-xs text-[#C66A18] dark:text-[#E68A24] font-mono">
+            {last7DaysData.reduce((sum, d) => sum + d.count, 0)} total sessions this week
           </span>
         </div>
 
@@ -190,7 +192,7 @@ export const ProgressPage: React.FC = () => {
           /* Accessible Data Table Toggle */
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase font-mono">
+              <thead className="border-b border-[#E8D5B5]/60 dark:border-[#3D352F] text-[#722F37] dark:text-[#E8D5B5] uppercase font-mono">
                 <tr>
                   <th className="py-2">Date</th>
                   <th className="py-2">Day</th>
@@ -198,20 +200,20 @@ export const ProgressPage: React.FC = () => {
                   <th className="py-2">Speaking Minutes</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-850">
+              <tbody className="divide-y divide-[#E8D5B5]/40 dark:divide-[#3D352F]">
                 {last7DaysData.map((d) => (
                   <tr key={d.dateStr}>
-                    <td className="py-2 font-mono">{d.dateStr}</td>
-                    <td className="py-2">{d.label}</td>
-                    <td className="py-2 font-mono font-bold">{d.count}</td>
-                    <td className="py-2 font-mono">{d.minutes} min</td>
+                    <td className="py-2 font-mono text-[#201B18] dark:text-[#FFF9EF]">{d.dateStr}</td>
+                    <td className="py-2 font-serif text-[#722F37] dark:text-[#E8D5B5]">{d.label}</td>
+                    <td className="py-2 font-mono font-bold text-[#C66A18] dark:text-[#E68A24]">{d.count}</td>
+                    <td className="py-2 font-mono text-[#201B18] dark:text-[#FFF9EF]">{d.minutes} min</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         ) : (
-          /* Hand-built SVG Accessible Bar Chart */
+          /* Accessible Temple Gold Bar Chart */
           <div className="pt-4">
             <div
               role="img"
@@ -222,22 +224,22 @@ export const ProgressPage: React.FC = () => {
                 const heightPercent = Math.max(8, (day.count / maxDayCount) * 100);
                 return (
                   <div key={day.dateStr} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
-                    <span className="text-[10px] font-mono text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-[10px] font-mono text-[#722F37] dark:text-[#E8D5B5] opacity-0 group-hover:opacity-100 transition-opacity">
                       {day.count} runs
                     </span>
                     <div
                       className={`w-full max-w-[42px] rounded-t-xl transition-all duration-300 ${
                         day.count > 0
-                          ? 'bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500'
-                          : 'bg-slate-200/60 dark:bg-slate-800/60'
+                          ? 'bg-gradient-to-t from-[#C66A18] to-[#E68A24] hover:to-[#D4AF65] border border-[#D4AF65]/40'
+                          : 'bg-[#E8D5B5]/40 dark:bg-[#3D352F]/40'
                       }`}
                       style={{ height: `${heightPercent}%` }}
                     />
                     <div className="text-center">
-                      <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 block">
+                      <span className="text-xs font-serif font-semibold text-[#201B18] dark:text-[#FFF9EF] block">
                         {day.label}
                       </span>
-                      <span className="text-[9px] text-slate-400 font-mono block">
+                      <span className="text-[9px] text-[#722F37] dark:text-[#E8D5B5] font-mono block">
                         {day.minutes > 0 ? `${day.minutes}m` : '-'}
                       </span>
                     </div>
@@ -252,43 +254,43 @@ export const ProgressPage: React.FC = () => {
       {/* Grounded Skill Analysis Panel */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Pacing & Speed Metrics */}
-        <Card padding="lg" className="border-slate-200 dark:border-slate-800 space-y-4">
+        <Card padding="lg" className="border-[#E8D5B5] dark:border-[#3D352F] space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-indigo-500" />
+            <h2 className="text-base font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#C66A18] dark:text-[#E68A24]" />
               <span>Grounded Skill: Pacing & Speed</span>
             </h2>
             <Badge variant="outline" size="sm">WPM Targets</Badge>
           </div>
 
           {!hasEnoughData ? (
-            <div className="p-6 text-center rounded-xl bg-slate-50 dark:bg-slate-850 border border-dashed border-slate-200 dark:border-slate-800 text-xs text-slate-500">
+            <div className="p-6 text-center rounded-xl bg-[#F5EBDD]/60 dark:bg-[#28211D] border border-dashed border-[#E8D5B5] dark:border-[#3D352F] text-xs text-[#722F37] dark:text-[#E8D5B5]">
               Not enough data yet. Complete at least 3 practice drills to generate pacing analytics.
             </div>
           ) : (
             <div className="space-y-3">
-              <div className="flex items-baseline justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-850">
-                <span className="text-xs text-slate-600 dark:text-slate-400">Average Speaking Speed:</span>
-                <span className="text-lg font-bold font-mono text-slate-900 dark:text-white">
+              <div className="flex items-baseline justify-between p-3 rounded-xl bg-[#F5EBDD]/60 dark:bg-[#28211D] border border-[#E8D5B5]/40 dark:border-[#3D352F]">
+                <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">Average Speaking Speed:</span>
+                <span className="text-lg font-serif font-bold font-mono text-[#201B18] dark:text-[#FFF9EF]">
                   {averageWpm} WPM
                 </span>
               </div>
 
-              <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
+              <div className="space-y-1.5 text-xs text-[#722F37] dark:text-[#E8D5B5]">
                 <div className="flex justify-between text-[11px]">
                   <span>Pacing Consistency</span>
-                  <span className="font-mono">
+                  <span className="font-mono text-[#C66A18] dark:text-[#E68A24]">
                     {averageWpm >= 110 && averageWpm <= 160 ? 'Optimal (Target Achieved)' : 'Needs Calibration'}
                   </span>
                 </div>
                 <ProgressBar
                   value={Math.min(100, Math.max(10, Math.round((averageWpm / 150) * 100)))}
-                  color="indigo"
+                  color="kesari"
                   size="sm"
                 />
               </div>
 
-              <p className="text-[11px] text-slate-500 leading-relaxed pt-1">
+              <p className="text-[11px] text-[#722F37]/80 dark:text-[#E8D5B5]/75 leading-relaxed pt-1">
                 Measured strictly from words spoken divided by recording duration. Ideal conversational range: 120-150 WPM.
               </p>
             </div>
@@ -296,37 +298,37 @@ export const ProgressPage: React.FC = () => {
         </Card>
 
         {/* Transcription Match Trend */}
-        <Card padding="lg" className="border-slate-200 dark:border-slate-800 space-y-4">
+        <Card padding="lg" className="border-[#E8D5B5] dark:border-[#3D352F] space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <h2 className="text-base font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#77764B] dark:text-[#D4AF65]" />
               <span>Transcription Match Trend</span>
             </h2>
             <Badge variant="outline" size="sm">Alignment</Badge>
           </div>
 
           {!hasEnoughData || averageMatchPercent === null ? (
-            <div className="p-6 text-center rounded-xl bg-slate-50 dark:bg-slate-850 border border-dashed border-slate-200 dark:border-slate-800 text-xs text-slate-500">
+            <div className="p-6 text-center rounded-xl bg-[#F5EBDD]/60 dark:bg-[#28211D] border border-dashed border-[#E8D5B5] dark:border-[#3D352F] text-xs text-[#722F37] dark:text-[#E8D5B5]">
               Not enough data yet. Enable transcription and complete 3 drills to view alignment trends.
             </div>
           ) : (
             <div className="space-y-3">
-              <div className="flex items-baseline justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-850">
-                <span className="text-xs text-slate-600 dark:text-slate-400">Average Word Match:</span>
-                <span className="text-lg font-bold font-mono text-emerald-600 dark:text-emerald-400">
+              <div className="flex items-baseline justify-between p-3 rounded-xl bg-[#F5EBDD]/60 dark:bg-[#28211D] border border-[#E8D5B5]/40 dark:border-[#3D352F]">
+                <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">Average Word Match:</span>
+                <span className="text-lg font-serif font-bold font-mono text-[#77764B] dark:text-[#D4AF65]">
                   {averageMatchPercent}%
                 </span>
               </div>
 
-              <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
+              <div className="space-y-1.5 text-xs text-[#722F37] dark:text-[#E8D5B5]">
                 <div className="flex justify-between text-[11px]">
                   <span>Target Alignment</span>
                   <span className="font-mono">{averageMatchPercent}% / 100%</span>
                 </div>
-                <ProgressBar value={averageMatchPercent} color="emerald" size="sm" />
+                <ProgressBar value={averageMatchPercent} color="gold" size="sm" />
               </div>
 
-              <p className="text-[11px] text-slate-500 leading-relaxed pt-1">
+              <p className="text-[11px] text-[#722F37]/80 dark:text-[#E8D5B5]/75 leading-relaxed pt-1">
                 Reflects standard speech-to-text recognition match against expected texts. Not a certified clinical articulation score.
               </p>
             </div>
@@ -335,15 +337,15 @@ export const ProgressPage: React.FC = () => {
       </div>
 
       {/* Achievements Badges (Data-Driven) */}
-      <Card padding="lg" className="border-slate-200 dark:border-slate-800 space-y-6">
+      <Card padding="lg" className="border-[#E8D5B5] dark:border-[#3D352F] space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-amber-500" />
-              <span>Earned Achievements ({data.unlockedAchievements.length} of {achievements.length})</span>
+            <h2 className="text-base font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] flex items-center gap-2">
+              <Trophy className="w-5 h-5 text-[#D4AF65]" />
+              <span>विद्या सिद्धि • Earned Achievements ({data.unlockedAchievements.length} of {achievements.length})</span>
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Data-driven milestones unlocked through verified practice.
+            <p className="text-xs text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-0.5">
+              Data-driven milestones unlocked through dedicated vocal practice.
             </p>
           </div>
         </div>
@@ -356,29 +358,29 @@ export const ProgressPage: React.FC = () => {
                 key={ach.id}
                 className={`p-4 rounded-xl border transition-all ${
                   isUnlocked
-                    ? 'bg-amber-50/50 dark:bg-amber-950/20 border-amber-200/80 dark:border-amber-900/40'
-                    : 'bg-slate-50/50 dark:bg-slate-900/30 border-slate-200/60 dark:border-slate-800 opacity-60'
+                    ? 'bg-[#F5EBDD]/70 dark:bg-[#28211D] border-[#D4AF65] shadow-xs'
+                    : 'bg-[#FFF9EF]/40 dark:bg-[#201B18]/40 border-[#E8D5B5]/60 dark:border-[#3D352F] opacity-60'
                 }`}
               >
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <div
                     className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
                       isUnlocked
-                        ? 'bg-amber-500 text-white shadow-xs'
-                        : 'bg-slate-200 dark:bg-slate-800 text-slate-400'
+                        ? 'bg-gradient-to-br from-[#E68A24] to-[#C66A18] text-white shadow-xs border border-[#D4AF65]'
+                        : 'bg-[#E8D5B5]/50 dark:bg-[#3D352F] text-[#722F37] dark:text-[#E8D5B5]'
                     }`}
                   >
                     {isUnlocked ? <Award className="w-5 h-5" /> : <Lock className="w-4 h-4" />}
                   </div>
-                  <Badge variant={isUnlocked ? 'warning' : 'outline'} size="sm">
+                  <Badge variant={isUnlocked ? 'gold' : 'outline'} size="sm">
                     {isUnlocked ? 'Unlocked' : `${ach.progress}/${ach.maxProgress}`}
                   </Badge>
                 </div>
 
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <h3 className="text-sm font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
                   {ach.title}
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-[#722F37] dark:text-[#E8D5B5] mt-1 leading-relaxed">
                   {ach.description}
                 </p>
 
@@ -387,7 +389,7 @@ export const ProgressPage: React.FC = () => {
                     <ProgressBar
                       value={(ach.progress / ach.maxProgress) * 100}
                       size="sm"
-                      color="amber"
+                      color="kesari"
                     />
                   </div>
                 )}

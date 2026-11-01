@@ -11,19 +11,19 @@ import {
   Briefcase,
   BarChart3,
   UserCheck,
-  Sparkles,
+  ShieldCheck,
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
   const navItems = [
     {
       to: '/dashboard',
-      label: 'Dashboard',
+      label: 'Sadhana Dashboard',
       icon: <LayoutDashboard className="w-5 h-5 shrink-0" />,
     },
     {
       to: '/learn',
-      label: 'Learn & Drills',
+      label: 'Learning & Drills',
       icon: <GraduationCap className="w-5 h-5 shrink-0" />,
     },
     {
@@ -33,7 +33,7 @@ export const Sidebar: React.FC = () => {
     },
     {
       to: '/progress',
-      label: 'Progress & Stats',
+      label: 'Progress & Insights',
       icon: <BarChart3 className="w-5 h-5 shrink-0" />,
     },
     {
@@ -44,7 +44,7 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="hidden md:flex flex-col w-64 shrink-0 border-r border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm p-4 min-h-[calc(100vh-4rem)]">
+    <aside className="hidden md:flex flex-col w-64 shrink-0 border-r border-[#E8D5B5] dark:border-[#3D352F] bg-[#FFF9EF]/60 dark:bg-[#201B18]/70 backdrop-blur-sm p-4 min-h-[calc(100vh-4rem)]">
       <div className="space-y-1.5 flex-1">
         {navItems.map((item) => (
           <NavLink
@@ -53,8 +53,8 @@ export const Sidebar: React.FC = () => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 isActive
-                  ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-semibold shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100/70 dark:hover:bg-slate-800/60'
+                  ? 'bg-[#FFF0DF] dark:bg-[#C66A18]/15 text-[#C66A18] dark:text-[#E68A24] font-bold border border-[#E68A24]/30 shadow-xs'
+                  : 'text-[#6B5E55] dark:text-[#B8A89A] hover:text-[#201B18] dark:hover:text-[#FFF9EF] hover:bg-[#F5EBDD]/70 dark:hover:bg-[#2A2420]'
               }`
             }
           >
@@ -64,14 +64,14 @@ export const Sidebar: React.FC = () => {
         ))}
       </div>
 
-      {/* Client-side guarantee badge */}
-      <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/50 mt-4">
-        <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-medium text-xs">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Local & Private</span>
+      {/* Sacred Sanctum Privacy Badge */}
+      <div className="p-3.5 rounded-xl bg-[#F5EBDD]/90 dark:bg-[#2A2420] border border-[#E8D5B5] dark:border-[#3D352F] mt-4 shadow-xs">
+        <div className="flex items-center gap-2 text-[#C66A18] dark:text-[#D4AF65] font-semibold text-xs">
+          <ShieldCheck className="w-4 h-4 text-[#C66A18] dark:text-[#D4AF65]" />
+          <span>पावनता • Sacred Privacy</span>
         </div>
-        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-          Zero cloud servers. Your audio & recordings stay strictly on your device.
+        <p className="text-[11px] text-[#6B5E55] dark:text-[#B8A89A] mt-1.5 leading-relaxed">
+          Zero remote servers. Your voice and recordings remain solely on your device.
         </p>
       </div>
     </aside>

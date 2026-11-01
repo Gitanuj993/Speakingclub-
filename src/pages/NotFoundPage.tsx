@@ -11,14 +11,14 @@ import { ArrowLeft, Home, Sparkles } from 'lucide-react';
 export const NotFoundPage: React.FC = () => {
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center p-6 max-w-md mx-auto">
-      <div className="w-16 h-16 rounded-3xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-extrabold text-2xl font-mono mb-6 shadow-sm">
-        404
+      <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-[#E68A24] to-[#C66A18] text-white flex items-center justify-center font-serif font-extrabold text-2xl mb-6 shadow-md border border-[#D4AF65]">
+        ४०४
       </div>
-      <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white">
-        Page Not Found
+      <h1 className="text-2xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
+        पृष्ठम् न लब्धम् • Page Not Found
       </h1>
-      <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
-        The practice drill, category, or route you are looking for does not exist or has been relocated.
+      <p className="text-xs text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-2 leading-relaxed">
+        The practice drill, category, or route you are looking for does not exist or has been relocated within the learning sanctum.
       </p>
 
       <div className="flex items-center gap-3 mt-6">

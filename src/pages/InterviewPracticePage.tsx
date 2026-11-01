@@ -97,13 +97,11 @@ export const InterviewPracticePage: React.FC = () => {
 
   // Prep Countdown Timer
   const prepTimer = useCountdown(selectedQuestion.prepSeconds, () => {
-    // Prep complete -> auto transition to speaking
     startSpeakingPhase();
   });
 
   // Speaking Countdown Timer
   const speakingTimer = useCountdown(selectedQuestion.speakSeconds, () => {
-    // Speaking limit reached -> auto stop
     handleStopSpeaking();
   });
 
@@ -247,7 +245,7 @@ export const InterviewPracticePage: React.FC = () => {
   const reviewFillers = useMemo(() => detectFillerWords(transcript), [transcript]);
   const totalFillersCount = reviewFillers.reduce((acc, curr) => acc + curr.count, 0);
 
-  const isTooShort = durationMs < 15000; // < 15s is likely underdeveloped
+  const isTooShort = durationMs < 15000;
   const isTooLong = durationMs >= selectedQuestion.speakSeconds * 1000;
 
   return (
@@ -255,12 +253,14 @@ export const InterviewPracticePage: React.FC = () => {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <Badge variant="primary" size="sm">Interview Practice Hub</Badge>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+          <div className="flex items-center gap-2 mb-1">
+            <Badge variant="gold" size="sm">साक्षात्कार साधना • Interview Studio</Badge>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] tracking-tight mt-1">
             Technical & Behavioral Interview Studio
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-2xl">
-            Simulate realistic pressure with prep countdowns, speaking timers, STAR structure checklists, and filler-word detection.
+          <p className="text-xs sm:text-sm text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-1 max-w-2xl">
+            Simulate realistic interview pressure with structured prep countdowns, speaking timers, STAR frameworks, and truthful cadence metrics.
           </p>
         </div>
 
@@ -296,10 +296,10 @@ export const InterviewPracticePage: React.FC = () => {
                     key={cat.id}
                     type="button"
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`text-xs px-3 py-1.5 rounded-xl border transition-all min-h-[38px] ${
+                    className={`text-xs px-3 py-1.5 rounded-xl border transition-all min-h-[38px] font-serif ${
                       selectedCategory === cat.id
-                        ? 'bg-indigo-600 text-white border-indigo-600 font-semibold shadow-xs'
-                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300'
+                        ? 'bg-[#C66A18] text-white border-[#C66A18] font-bold shadow-xs'
+                        : 'bg-[#FFF9EF] dark:bg-[#201B18] border-[#E8D5B5] dark:border-[#3D352F] text-[#722F37] dark:text-[#E8D5B5] hover:border-[#D4AF65]'
                     }`}
                   >
                     {cat.label}
@@ -308,55 +308,55 @@ export const InterviewPracticePage: React.FC = () => {
               </div>
 
               {/* Active Featured Question Card */}
-              <Card padding="lg" className="border-indigo-200 dark:border-indigo-900 shadow-md">
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+              <Card padding="lg" className="border-[#D4AF65]/60 dark:border-[#D4AF65]/30 shadow-md">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-[#E8D5B5]/60 dark:border-[#3D352F]">
                   <div className="flex items-center gap-2">
-                    <Badge variant="primary" size="sm">
+                    <Badge variant="gold" size="sm">
                       {selectedQuestion.categoryLabel}
                     </Badge>
                     <Badge variant="outline" size="sm">
                       {selectedQuestion.difficulty}
                     </Badge>
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-slate-500 font-mono">
+                  <div className="flex items-center gap-3 text-xs text-[#722F37] dark:text-[#E8D5B5] font-mono">
                     <span>⏱️ Prep: {selectedQuestion.prepSeconds}s</span>
                     <span>🎙️ Speak: {selectedQuestion.speakSeconds}s</span>
                   </div>
                 </div>
 
                 <div className="py-6">
-                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
                     "{selectedQuestion.question}"
                   </h2>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                  <p className="text-xs text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-2 leading-relaxed">
                     <strong>Instructions:</strong> {selectedQuestion.instructions}
                   </p>
                 </div>
 
                 {/* Framework and Structure Outline */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs">
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850">
-                    <span className="font-bold text-indigo-600 dark:text-indigo-400">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-[#E8D5B5]/60 dark:border-[#3D352F] text-xs">
+                  <div className="p-3.5 rounded-xl bg-[#F5EBDD]/60 dark:bg-[#28211D] border border-[#E8D5B5]/40 dark:border-[#3D352F]">
+                    <span className="font-serif font-bold text-[#C66A18] dark:text-[#E68A24]">
                       Recommended Framework: {selectedQuestion.framework}
                     </span>
-                    <ul className="mt-2 space-y-1 text-slate-600 dark:text-slate-400">
+                    <ul className="mt-2 space-y-1 text-[#201B18]/80 dark:text-[#E8D5B5]/80">
                       {selectedQuestion.frameworkChecklist.map((item, idx) => (
                         <li key={idx} className="flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C66A18] dark:bg-[#E68A24]" />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850">
-                    <span className="font-bold text-slate-700 dark:text-slate-300">
+                  <div className="p-3.5 rounded-xl bg-[#F5EBDD]/60 dark:bg-[#28211D] border border-[#E8D5B5]/40 dark:border-[#3D352F]">
+                    <span className="font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
                       Sample Structure Outline:
                     </span>
-                    <ul className="mt-2 space-y-1 text-slate-600 dark:text-slate-400">
+                    <ul className="mt-2 space-y-1 text-[#201B18]/80 dark:text-[#E8D5B5]/80">
                       {selectedQuestion.sampleStructure.map((step, idx) => (
                         <li key={idx} className="flex items-center gap-1.5">
-                          <span className="text-slate-400 font-mono text-[10px]">{idx + 1}.</span>
+                          <span className="text-[#C66A18] font-mono text-[10px]">{idx + 1}.</span>
                           <span>{step}</span>
                         </li>
                       ))}
@@ -378,7 +378,7 @@ export const InterviewPracticePage: React.FC = () => {
 
               {/* Questions List for quick selection */}
               <div>
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-3">
+                <h3 className="text-sm font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] mb-3">
                   All Questions in This Category ({filteredQuestions.length})
                 </h3>
                 <div className="grid grid-cols-1 gap-2.5">
@@ -391,13 +391,13 @@ export const InterviewPracticePage: React.FC = () => {
                         onClick={() => setSelectedQuestion(q)}
                         className={`p-3.5 rounded-xl border cursor-pointer transition-all flex items-center justify-between gap-4 ${
                           isCurrent
-                            ? 'border-indigo-600 bg-indigo-50/40 dark:bg-indigo-950/40 ring-1 ring-indigo-500'
-                            : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 bg-white dark:bg-slate-900'
+                            ? 'border-[#C66A18] bg-[#F5EBDD] dark:bg-[#28211D] ring-1 ring-[#C66A18]'
+                            : 'border-[#E8D5B5] dark:border-[#3D352F] hover:border-[#D4AF65] bg-[#FFF9EF] dark:bg-[#201B18]'
                         }`}
                       >
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[11px] font-mono text-slate-400 uppercase">
+                            <span className="text-[11px] font-mono text-[#722F37] dark:text-[#E8D5B5] uppercase">
                               {q.categoryLabel}
                             </span>
                             {attemptsForQ > 0 && (
@@ -406,11 +406,11 @@ export const InterviewPracticePage: React.FC = () => {
                               </Badge>
                             )}
                           </div>
-                          <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                          <p className="text-sm font-serif font-semibold text-[#201B18] dark:text-[#FFF9EF] truncate">
                             {q.question}
                           </p>
                         </div>
-                        <div className="text-xs text-slate-400 font-mono shrink-0">
+                        <div className="text-xs text-[#722F37] dark:text-[#E8D5B5] font-mono shrink-0">
                           {q.speakSeconds}s
                         </div>
                       </div>
@@ -423,26 +423,26 @@ export const InterviewPracticePage: React.FC = () => {
 
           {/* Phase 2: Countdown Prep Timer */}
           {phase === 'prep' && (
-            <Card padding="lg" className="border-amber-200 dark:border-amber-900/60 text-center py-12 space-y-6">
+            <Card padding="lg" className="border-[#D4AF65] text-center py-12 space-y-6">
               <Badge variant="warning" size="md">
-                Preparation Time
+                विचार मंथन • Preparation Phase
               </Badge>
 
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white max-w-xl mx-auto">
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] max-w-xl mx-auto">
                   "{selectedQuestion.question}"
                 </h2>
-                <p className="text-xs text-slate-500 mt-2">
-                  Use this time to organize your thoughts according to the {selectedQuestion.framework} model.
+                <p className="text-xs text-[#722F37] dark:text-[#E8D5B5] mt-2">
+                  Use this calm pause to organize your response according to the {selectedQuestion.framework} model.
                 </p>
               </div>
 
               {/* Big Countdown */}
               <div className="py-4">
-                <span className="text-6xl sm:text-7xl font-extrabold font-mono text-amber-600 dark:text-amber-400">
+                <span className="text-6xl sm:text-7xl font-serif font-extrabold font-mono text-[#C66A18] dark:text-[#E68A24]">
                   {prepTimer.secondsLeft}
                 </span>
-                <p className="text-xs text-slate-400 font-mono mt-1">seconds remaining</p>
+                <p className="text-xs text-[#722F37] dark:text-[#E8D5B5] font-mono mt-1">seconds remaining</p>
               </div>
 
               <div className="flex items-center justify-center gap-3">
@@ -458,33 +458,33 @@ export const InterviewPracticePage: React.FC = () => {
 
           {/* Phase 3: Active Timed Speaking */}
           {phase === 'speaking' && (
-            <Card padding="lg" className="border-rose-200 dark:border-rose-900/60 text-center py-10 space-y-6">
+            <Card padding="lg" className="border-[#C64B32] text-center py-10 space-y-6">
               <div className="flex items-center justify-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-rose-600 animate-ping" />
-                <Badge variant="danger" size="md">Live Interview Response</Badge>
+                <span className="w-3 h-3 rounded-full bg-[#C64B32] animate-ping" />
+                <Badge variant="danger" size="md">वाक् प्रस्तुति • Live Response</Badge>
               </div>
 
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white max-w-xl mx-auto">
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] max-w-xl mx-auto">
                   "{selectedQuestion.question}"
                 </h2>
               </div>
 
               {/* Big Speaking Countdown Clock */}
               <div className="py-2">
-                <div className="text-5xl sm:text-6xl font-extrabold font-mono text-slate-900 dark:text-white">
+                <div className="text-5xl sm:text-6xl font-mono font-extrabold text-[#201B18] dark:text-[#FFF9EF]">
                   {speakingTimer.formattedTime}
                 </div>
-                <p className="text-xs text-slate-400 font-mono mt-1">
+                <p className="text-xs text-[#722F37] dark:text-[#E8D5B5] font-mono mt-1">
                   Duration: {formattedDuration} (Limit: {selectedQuestion.speakSeconds}s)
                 </p>
               </div>
 
               {/* Live transcript preview if active */}
               {shouldRunRecognition && (
-                <div className="max-w-xl mx-auto p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 min-h-[60px] text-left">
-                  <span className="font-semibold text-slate-400 block mb-1">Live Transcription Preview:</span>
-                  {transcript || <span className="italic text-slate-400">Listening to your response...</span>}
+                <div className="max-w-xl mx-auto p-4 rounded-xl bg-[#F5EBDD]/60 dark:bg-[#28211D] border border-[#E8D5B5] dark:border-[#3D352F] text-xs text-[#201B18] dark:text-[#FFF9EF] min-h-[60px] text-left">
+                  <span className="font-serif font-semibold text-[#C66A18] block mb-1">Live Transcription Preview:</span>
+                  {transcript || <span className="italic text-[#722F37] dark:text-[#E8D5B5]">Listening to your voice...</span>}
                 </div>
               )}
 
@@ -504,11 +504,11 @@ export const InterviewPracticePage: React.FC = () => {
           {/* Phase 4: Review & Feedback Report */}
           {phase === 'review' && (
             <div className="space-y-6">
-              <Card padding="lg" className="border-slate-200 dark:border-slate-800 space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+              <Card padding="lg" className="border-[#E8D5B5] dark:border-[#3D352F] space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-[#E8D5B5]/60 dark:border-[#3D352F]">
                   <div>
                     <Badge variant="success" size="sm">Response Recorded</Badge>
-                    <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
+                    <h2 className="text-xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] mt-1">
                       {selectedQuestion.question}
                     </h2>
                   </div>
@@ -519,7 +519,7 @@ export const InterviewPracticePage: React.FC = () => {
 
                 {/* Audio Replay */}
                 {audioUrl && (
-                  <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center gap-3 p-3 rounded-xl bg-[#F5EBDD]/60 dark:bg-[#28211D] border border-[#E8D5B5] dark:border-[#3D352F]">
                     <audio
                       ref={reviewAudioRef}
                       src={audioUrl}
@@ -540,11 +540,11 @@ export const InterviewPracticePage: React.FC = () => {
                           }
                         }
                       }}
-                      icon={<Volume2 className="w-4 h-4 text-indigo-500" />}
+                      icon={<Volume2 className="w-4 h-4 text-[#C66A18]" />}
                     >
                       {isPlayingReview ? 'Pause' : 'Replay Full Audio'}
                     </Button>
-                    <span className="text-xs text-slate-500 font-mono">
+                    <span className="text-xs text-[#722F37] dark:text-[#E8D5B5] font-mono">
                       Speaking Time: {(durationMs / 1000).toFixed(1)}s
                     </span>
                   </div>
@@ -552,34 +552,34 @@ export const InterviewPracticePage: React.FC = () => {
 
                 {/* Rule-Based Basic Communication Feedback */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
-                    <span className="text-xs text-slate-500">Speaking Pace</span>
-                    <div className="text-2xl font-bold font-mono text-slate-900 dark:text-white mt-1">
+                  <div className="p-3.5 rounded-xl bg-[#F5EBDD]/50 dark:bg-[#28211D] border border-[#E8D5B5]/40 dark:border-[#3D352F]">
+                    <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">Speaking Pace</span>
+                    <div className="text-2xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] mt-1">
                       {reviewWpm} <span className="text-xs font-normal">WPM</span>
                     </div>
-                    <span className="text-[11px] text-slate-500 mt-1 block">
+                    <span className="text-[11px] text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-1 block">
                       Target: 120-150 WPM
                     </span>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
-                    <span className="text-xs text-slate-500">Filler Words Detected</span>
-                    <div className={`text-2xl font-bold font-mono mt-1 ${
-                      totalFillersCount > 3 ? 'text-amber-500' : 'text-emerald-500'
+                  <div className="p-3.5 rounded-xl bg-[#F5EBDD]/50 dark:bg-[#28211D] border border-[#E8D5B5]/40 dark:border-[#3D352F]">
+                    <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">Filler Words Detected</span>
+                    <div className={`text-2xl font-serif font-bold mt-1 ${
+                      totalFillersCount > 3 ? 'text-[#C66A18]' : 'text-[#77764B] dark:text-[#D4AF65]'
                     }`}>
                       {totalFillersCount}
                     </div>
-                    <span className="text-[11px] text-slate-500 mt-1 block">
+                    <span className="text-[11px] text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-1 block">
                       {reviewFillers.map((f) => `"${f.word}" (${f.count})`).join(', ') || 'Clean delivery'}
                     </span>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
-                    <span className="text-xs text-slate-500">Length Assessment</span>
-                    <div className="text-sm font-bold text-slate-900 dark:text-white mt-2">
+                  <div className="p-3.5 rounded-xl bg-[#F5EBDD]/50 dark:bg-[#28211D] border border-[#E8D5B5]/40 dark:border-[#3D352F]">
+                    <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">Length Assessment</span>
+                    <div className="text-sm font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] mt-2">
                       {isTooShort ? '⚠️ Too Brief' : isTooLong ? '⚠️ Hit Max Limit' : '✓ Well Balanced'}
                     </div>
-                    <span className="text-[11px] text-slate-500 mt-1 block">
+                    <span className="text-[11px] text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-1 block">
                       {(durationMs / 1000).toFixed(1)}s vs {selectedQuestion.speakSeconds}s limit
                     </span>
                   </div>
@@ -588,10 +588,10 @@ export const InterviewPracticePage: React.FC = () => {
                 {/* Transcript Review */}
                 {transcript && (
                   <div className="space-y-1.5">
-                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    <span className="text-xs font-serif font-semibold text-[#201B18] dark:text-[#FFF9EF]">
                       Spoken Transcript:
                     </span>
-                    <p className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-mono select-text">
+                    <p className="p-4 rounded-xl bg-[#F5EBDD]/50 dark:bg-[#28211D] border border-[#E8D5B5] dark:border-[#3D352F] text-xs text-[#201B18] dark:text-[#FFF9EF] leading-relaxed font-mono select-text">
                       {transcript}
                     </p>
                   </div>
@@ -599,7 +599,7 @@ export const InterviewPracticePage: React.FC = () => {
 
                 {/* Framework Self-Review Checklist */}
                 <div className="space-y-3 pt-2">
-                  <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                  <h3 className="text-xs font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] uppercase tracking-wider">
                     {selectedQuestion.framework} Self-Review Checklist
                   </h3>
                   <div className="space-y-2 text-xs">
@@ -614,9 +614,9 @@ export const InterviewPracticePage: React.FC = () => {
                               [item]: e.target.checked,
                             })
                           }
-                          className="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4"
+                          className="rounded text-[#C66A18] focus:ring-[#C66A18] w-4 h-4"
                         />
-                        <span className="text-slate-700 dark:text-slate-300">{item}</span>
+                        <span className="text-[#201B18] dark:text-[#FFF9EF]">{item}</span>
                       </label>
                     ))}
                   </div>
@@ -624,7 +624,7 @@ export const InterviewPracticePage: React.FC = () => {
 
                 {/* Self Notes */}
                 <div className="space-y-1.5 pt-2">
-                  <label htmlFor="self-notes" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  <label htmlFor="self-notes" className="text-xs font-serif font-semibold text-[#201B18] dark:text-[#FFF9EF]">
                     Self Notes & Learnings (Saved to local history):
                   </label>
                   <textarea
@@ -632,12 +632,12 @@ export const InterviewPracticePage: React.FC = () => {
                     rows={3}
                     value={selfNotes}
                     onChange={(e) => setSelfNotes(e.target.value)}
-                    placeholder="e.g. Next time, state the quantitative latency reduction earlier in the answer..."
-                    className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    placeholder="e.g. Next time, state the quantitative impact earlier in the answer..."
+                    className="w-full p-3 rounded-xl border border-[#E8D5B5] dark:border-[#3D352F] bg-[#FFF9EF] dark:bg-[#201B18] text-xs text-[#201B18] dark:text-[#FFF9EF] focus:ring-2 focus:ring-[#C66A18] focus:outline-none"
                   />
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-center justify-between pt-4 border-t border-[#E8D5B5]/60 dark:border-[#3D352F]">
                   <Button variant="outline" size="sm" onClick={resetFlow} icon={<RotateCcw className="w-3.5 h-3.5" />}>
                     Retry Question
                   </Button>
@@ -670,10 +670,10 @@ export const InterviewPracticePage: React.FC = () => {
                   key={c.id}
                   type="button"
                   onClick={() => setHistoryCategoryFilter(c.id)}
-                  className={`text-xs px-2.5 py-1 rounded-lg border transition-all ${
+                  className={`text-xs px-2.5 py-1 rounded-lg border transition-all font-serif ${
                     historyCategoryFilter === c.id
-                      ? 'bg-indigo-600 text-white border-indigo-600 font-semibold'
-                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
+                      ? 'bg-[#C66A18] text-white border-[#C66A18] font-bold'
+                      : 'bg-[#FFF9EF] dark:bg-[#201B18] border-[#E8D5B5] dark:border-[#3D352F] text-[#722F37] dark:text-[#E8D5B5]'
                   }`}
                 >
                   {c.label}
@@ -686,8 +686,8 @@ export const InterviewPracticePage: React.FC = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowClearAllModal(true)}
-                icon={<Trash2 className="w-3.5 h-3.5 text-rose-500" />}
-                className="text-rose-600 dark:text-rose-400"
+                icon={<Trash2 className="w-3.5 h-3.5 text-[#C64B32]" />}
+                className="text-[#C64B32]"
               >
                 Clear All History
               </Button>
@@ -698,25 +698,25 @@ export const InterviewPracticePage: React.FC = () => {
             <EmptyState
               title="No interview responses recorded yet"
               description="Complete your first timed response to view speaking cadence, filler counts, and self-review notes."
-              icon={<Briefcase className="w-6 h-6 text-indigo-500" />}
+              icon={<Briefcase className="w-6 h-6 text-[#C66A18]" />}
               actionLabel="Start Interview Practice"
               onAction={() => setActiveTab('practice')}
             />
           ) : (
             <div className="space-y-4">
               {filteredHistory.map((att) => (
-                <Card key={att.id} padding="md" className="border-slate-200 dark:border-slate-800 space-y-3">
+                <Card key={att.id} padding="md" className="border-[#E8D5B5] dark:border-[#3D352F] space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-2">
                         <Badge variant="outline" size="sm" className="capitalize">
                           {att.category.replace('-', ' ')}
                         </Badge>
-                        <span className="text-[11px] text-slate-400 font-mono">
+                        <span className="text-[11px] text-[#722F37] dark:text-[#E8D5B5] font-mono">
                           {formatFriendlyDate(att.timestamp)}
                         </span>
                       </div>
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white mt-1">
+                      <h3 className="text-sm font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] mt-1">
                         {att.questionText}
                       </h3>
                     </div>
@@ -727,7 +727,7 @@ export const InterviewPracticePage: React.FC = () => {
                           size="sm"
                           variant="secondary"
                           onClick={() => handlePlayHistoryAudio(att.audioBlobId)}
-                          icon={<Volume2 className="w-3.5 h-3.5" />}
+                          icon={<Volume2 className="w-3.5 h-3.5 text-[#C66A18]" />}
                         >
                           Play Audio
                         </Button>
@@ -735,7 +735,7 @@ export const InterviewPracticePage: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setDeleteTargetId(att.id)}
-                        className="p-2 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        className="p-2 text-[#722F37] dark:text-[#E8D5B5] hover:text-[#C64B32] rounded-lg hover:bg-[#F5EBDD] dark:hover:bg-[#28211D] transition-colors"
                         title="Delete attempt"
                         aria-label="Delete attempt"
                       >
@@ -745,7 +745,7 @@ export const InterviewPracticePage: React.FC = () => {
                   </div>
 
                   {/* Metrics bar */}
-                  <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-600 dark:text-slate-400 pt-1">
+                  <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#722F37] dark:text-[#E8D5B5] pt-1">
                     <span>⏱️ Duration: {(att.speakingDurationMs / 1000).toFixed(1)}s</span>
                     <span>📈 Pace: {att.wpm} WPM</span>
                     <span>
@@ -757,13 +757,13 @@ export const InterviewPracticePage: React.FC = () => {
                   </div>
 
                   {att.transcript && (
-                    <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-850 text-xs text-slate-700 dark:text-slate-300 font-mono">
+                    <div className="p-3 rounded-lg bg-[#F5EBDD]/50 dark:bg-[#28211D] text-xs text-[#201B18] dark:text-[#FFF9EF] font-mono border border-[#E8D5B5]/40 dark:border-[#3D352F]">
                       "{att.transcript}"
                     </div>
                   )}
 
                   {att.selfNotes && (
-                    <div className="text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50/50 dark:bg-indigo-950/30 p-2.5 rounded-lg border border-indigo-100 dark:border-indigo-900">
+                    <div className="text-xs text-[#722F37] dark:text-[#E8D5B5] bg-[#E8D5B5]/30 dark:bg-[#28211D] p-2.5 rounded-lg border border-[#D4AF65]/40">
                       <strong>Self Notes:</strong> {att.selfNotes}
                     </div>
                   )}

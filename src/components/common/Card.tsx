@@ -30,17 +30,17 @@ export const Card: React.FC<CardProps> = ({
   };
 
   const hoverStyles = hover
-    ? 'hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md transition-all duration-200'
+    ? 'hover:border-[#D4AF65] dark:hover:border-[#D4AF65]/60 hover:shadow-md hover:shadow-[#D4AF65]/10 transition-all duration-300'
     : '';
 
   const borderStyles = border
-    ? 'border border-slate-200/80 dark:border-slate-800/80'
+    ? 'border border-[#E8D5B5] dark:border-[#3D352F]'
     : '';
 
   return (
     <div
       onClick={onClick}
-      className={`bg-white dark:bg-slate-900 rounded-2xl ${borderStyles} ${paddingStyles[padding]} ${hoverStyles} ${
+      className={`bg-[#FFF9EF] dark:bg-[#201B18] rounded-2xl ${borderStyles} ${paddingStyles[padding]} ${hoverStyles} ${
         onClick ? 'cursor-pointer' : ''
       } ${className}`}
     >

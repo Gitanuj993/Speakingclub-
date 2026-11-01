@@ -11,6 +11,8 @@ export type BadgeVariant =
   | 'success'
   | 'warning'
   | 'danger'
+  | 'gold'
+  | 'maroon'
   | 'outline';
 
 export interface BadgeProps {
@@ -29,23 +31,27 @@ export const Badge: React.FC<BadgeProps> = ({
   className = '',
 }) => {
   const sizeStyles = {
-    sm: 'text-xs px-2 py-0.5 gap-1',
-    md: 'text-xs px-2.5 py-1 gap-1.5',
+    sm: 'text-[11px] px-2.5 py-0.5 gap-1',
+    md: 'text-xs px-3 py-1 gap-1.5',
   };
 
   const variantStyles = {
     default:
-      'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200/60 dark:border-slate-700/60',
+      'bg-[#F5EBDD] text-[#6B5E55] dark:bg-[#2A2420] dark:text-[#E8D5B5] border border-[#E8D5B5] dark:border-[#3D352F]',
     primary:
-      'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800/60',
+      'bg-[#FFF0DF] text-[#C66A18] dark:bg-[#C66A18]/20 dark:text-[#E68A24] border border-[#E68A24]/30',
+    gold:
+      'bg-[#FBF6EC] text-[#B08930] dark:bg-[#D4AF65]/15 dark:text-[#D4AF65] border border-[#D4AF65]/40',
     success:
-      'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60',
+      'bg-[#F4F5E6] text-[#616035] dark:bg-[#77764B]/20 dark:text-[#D4AF65] border border-[#77764B]/30',
     warning:
-      'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200/60 dark:border-amber-800/60',
+      'bg-[#FFF5E6] text-[#C66A18] dark:bg-[#E68A24]/15 dark:text-[#E68A24] border border-[#E68A24]/30',
     danger:
-      'bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200/60 dark:border-rose-800/60',
+      'bg-[#FBECE9] text-[#C64B32] dark:bg-[#C64B32]/20 dark:text-[#E88C78] border border-[#C64B32]/30',
+    maroon:
+      'bg-[#F7EBEF] text-[#722F37] dark:bg-[#722F37]/20 dark:text-[#E8A5AE] border border-[#722F37]/30',
     outline:
-      'bg-transparent text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700',
+      'bg-transparent text-[#C66A18] dark:text-[#D4AF65] border border-[#D4AF65]/60 dark:border-[#D4AF65]/35',
   };
 
   return (

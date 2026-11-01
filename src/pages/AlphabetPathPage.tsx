@@ -10,7 +10,7 @@ import { Card } from '../components/common/Card';
 import { Badge } from '../components/common/Badge';
 import { ProgressBar } from '../components/common/ProgressBar';
 import { getAlphabetModules } from '../services/curriculumService';
-import { CheckCircle2, Sparkles } from 'lucide-react';
+import { CheckCircle2, Sparkles, ArrowLeft } from 'lucide-react';
 
 export const AlphabetPathPage: React.FC = () => {
   const { data } = useUser();
@@ -22,22 +22,23 @@ export const AlphabetPathPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <Link to="/learn" className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline">
-              ← Learning Hub
+            <Link to="/learn" className="text-xs font-serif text-[#C66A18] dark:text-[#E68A24] hover:underline flex items-center gap-1">
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>ज्ञान मार्ग (Learning Hub)</span>
             </Link>
-            <span className="text-slate-300 dark:text-slate-700">•</span>
-            <Badge variant="primary" size="sm">A to Z Path</Badge>
+            <span className="text-[#D4AF65]">•</span>
+            <Badge variant="gold" size="sm">वर्णमाला साधना • A to Z</Badge>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1.5">
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] tracking-tight mt-1.5">
             26-Letter Phonetic Path
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-2xl">
-            All 26 letter modules and levels are fully unlocked. Practice any sound or difficulty freely.
+          <p className="text-xs sm:text-sm text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-1 max-w-2xl">
+            All 26 sacred letter modules and levels are unlocked. Target specific consonant articulations, vowels, and minimal pair contrasts freely.
           </p>
         </div>
 
         <Badge variant="success" size="sm" icon={<Sparkles className="w-3.5 h-3.5" />}>
-          All Modules & Levels Unlocked
+          All 26 Modules & Levels Unlocked
         </Badge>
       </div>
 
@@ -54,19 +55,19 @@ export const AlphabetPathPage: React.FC = () => {
             <Card
               key={mod.id}
               padding="md"
-              className="flex flex-col justify-between border border-slate-200/90 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-800/60 shadow-xs transition-all duration-200"
+              className="flex flex-col justify-between border border-[#E8D5B5] dark:border-[#3D352F] hover:border-[#D4AF65] dark:hover:border-[#D4AF65] shadow-xs transition-all duration-200"
             >
               <div>
                 <div className="flex items-start justify-between gap-3 mb-2.5">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-2xl flex items-center justify-center font-extrabold text-lg font-mono bg-indigo-600 text-white shadow-sm shadow-indigo-500/20">
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center font-serif font-extrabold text-xl bg-gradient-to-br from-[#E68A24] to-[#C66A18] text-white shadow-sm shadow-[#C66A18]/25 border border-[#D4AF65]">
                       {mod.letter}
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                      <h3 className="text-sm font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
                         {mod.name}
                       </h3>
-                      <p className="text-[11px] text-indigo-600 dark:text-indigo-400 font-medium line-clamp-1">
+                      <p className="text-[11px] text-[#C66A18] dark:text-[#E68A24] font-medium line-clamp-1">
                         {mod.focus}
                       </p>
                     </div>
@@ -78,7 +79,7 @@ export const AlphabetPathPage: React.FC = () => {
                   {mod.minimalPairs.slice(0, 3).map(([p1, p2], idx) => (
                     <span
                       key={idx}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#F5EBDD] dark:bg-[#28211D] text-[#722F37] dark:text-[#E8D5B5] border border-[#E8D5B5]/60 dark:border-[#3D352F]"
                     >
                       {p1} / {p2}
                     </span>
@@ -87,12 +88,12 @@ export const AlphabetPathPage: React.FC = () => {
               </div>
 
               {/* Levels Selector (All unlocked) */}
-              <div className="mt-5 pt-3.5 border-t border-slate-100 dark:border-slate-800 space-y-2">
-                <div className="flex items-center justify-between text-[11px] text-slate-500 mb-1">
-                  <span>Module Progress</span>
+              <div className="mt-5 pt-3.5 border-t border-[#E8D5B5]/60 dark:border-[#3D352F] space-y-2">
+                <div className="flex items-center justify-between text-[11px] text-[#722F37] dark:text-[#E8D5B5] mb-1">
+                  <span className="font-serif">Module Progress</span>
                   <span className="font-mono">{completedLevels} of 3 Levels</span>
                 </div>
-                <ProgressBar value={percent} size="sm" color="indigo" />
+                <ProgressBar value={percent} size="sm" color="kesari" />
 
                 <div className="grid grid-cols-3 gap-1.5 pt-2">
                   {mod.exercises.map((ex) => {
@@ -104,14 +105,14 @@ export const AlphabetPathPage: React.FC = () => {
                       <Link
                         key={ex.id}
                         to={`/lesson/${ex.id}`}
-                        className={`flex items-center justify-center gap-1 py-1.5 px-2 rounded-lg text-[10px] font-semibold transition-all min-h-[36px] ${
+                        className={`flex items-center justify-center gap-1 py-1.5 px-2 rounded-lg text-[10px] font-serif font-semibold transition-all min-h-[36px] ${
                           isExCompleted
-                            ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800/70'
-                            : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400'
+                            ? 'bg-[#77764B]/15 text-[#77764B] dark:text-[#D4AF65] border border-[#77764B]/40'
+                            : 'bg-white dark:bg-[#28211D] text-[#201B18] dark:text-[#FFF9EF] border border-[#E8D5B5] dark:border-[#3D352F] hover:border-[#D4AF65] hover:text-[#C66A18] dark:hover:text-[#E68A24]'
                         }`}
                       >
                         {isExCompleted && (
-                          <CheckCircle2 className="w-3 h-3 text-emerald-500 shrink-0" />
+                          <CheckCircle2 className="w-3 h-3 text-[#77764B] dark:text-[#D4AF65] shrink-0" />
                         )}
                         <span className="capitalize">{ex.level.slice(0, 3)}</span>
                       </Link>

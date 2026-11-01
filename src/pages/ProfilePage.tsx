@@ -18,11 +18,8 @@ import {
   RotateCcw,
   Volume2,
   Mic,
-  Moon,
-  Sun,
   HardDrive,
   Sparkles,
-  AlertTriangle,
   CheckCircle2,
 } from 'lucide-react';
 
@@ -61,7 +58,7 @@ export const ProfilePage: React.FC = () => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `speaklab_backup_${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `speakingClub_backup_${new Date().toISOString().split('T')[0]}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -105,32 +102,34 @@ export const ProfilePage: React.FC = () => {
     <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-8">
       {/* Header */}
       <div>
-        <Badge variant="primary" size="sm">Settings & Privacy</Badge>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+        <Badge variant="gold" size="sm">साधना व्यवस्था • Settings & Privacy</Badge>
+        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] tracking-tight mt-1">
           Profile & Practice Configuration
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-          All data is strictly client-side. Configure transcription consent, audio storage, themes, and backup.
+        <p className="text-xs sm:text-sm text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-1">
+          Rooted in sacred privacy. All audio and attempt data remains client-side in your personal browser.
         </p>
       </div>
 
       {/* Local Storage Notice Banner */}
-      <div className="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-900/60 flex items-start gap-3">
-        <HardDrive className="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
-        <div className="text-xs text-indigo-950 dark:text-indigo-200 leading-relaxed">
-          <strong className="block mb-0.5 font-bold">Client-Side Architecture Guarantee:</strong>
-          SpeakLab stores your progress, attempts, and audio recordings exclusively in this browser's
-          Local Storage and IndexedDB. It does not sync across separate devices and will be removed if
-          you clear your browser site data. Use <strong>Export Progress (JSON)</strong> below to back up your journey.
+      <div className="p-4 rounded-2xl bg-[#F5EBDD] dark:bg-[#28211D] border border-[#D4AF65]/60 flex items-start gap-3.5 shadow-xs">
+        <HardDrive className="w-5 h-5 text-[#C66A18] dark:text-[#E68A24] shrink-0 mt-0.5" />
+        <div className="text-xs text-[#201B18] dark:text-[#FFF9EF] leading-relaxed">
+          <strong className="block mb-0.5 font-serif font-bold text-[#C66A18] dark:text-[#E68A24]">
+            पावनता एवं गोपनीयता • Client-Side Sacred Privacy Guarantee
+          </strong>
+          speakingClub stores your vocal progress, streak, and audio recordings exclusively in this browser's
+          Local Storage and IndexedDB. It does not sync to cloud servers and will be cleared if
+          you erase browser site data. Use <strong>Export Progress (JSON)</strong> below to back up your sadhana.
         </div>
       </div>
 
       {/* Profile Form */}
-      <Card padding="lg" className="border-slate-200 dark:border-slate-800">
+      <Card padding="lg" className="border-[#E8D5B5] dark:border-[#3D352F]">
         <form onSubmit={handleSaveProfile} className="space-y-6">
-          <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
-            <User className="w-5 h-5 text-indigo-500" />
-            <h2 className="text-base font-bold text-slate-900 dark:text-white">
+          <div className="flex items-center gap-2 pb-3 border-b border-[#E8D5B5]/60 dark:border-[#3D352F]">
+            <User className="w-5 h-5 text-[#C66A18] dark:text-[#E68A24]" />
+            <h2 className="text-base font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
               Personal Information & Goals
             </h2>
           </div>
@@ -139,7 +138,7 @@ export const ProfilePage: React.FC = () => {
             <div>
               <label
                 htmlFor="profile-name"
-                className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1"
+                className="block text-xs font-serif font-semibold text-[#722F37] dark:text-[#E8D5B5] mb-1"
               >
                 Display Name
               </label>
@@ -148,16 +147,16 @@ export const ProfilePage: React.FC = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2 rounded-xl border border-[#E8D5B5] dark:border-[#3D352F] bg-[#FFF9EF] dark:bg-[#201B18] text-xs text-[#201B18] dark:text-[#FFF9EF] focus:ring-2 focus:ring-[#C66A18] focus:outline-none"
               />
             </div>
 
             <div>
               <label
                 htmlFor="profile-daily-goal"
-                className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1"
+                className="block text-xs font-serif font-semibold text-[#722F37] dark:text-[#E8D5B5] mb-1"
               >
-                Daily Practice Target (Exercises)
+                दैनिक संकल्प • Daily Target (Drills)
               </label>
               <input
                 id="profile-daily-goal"
@@ -166,7 +165,7 @@ export const ProfilePage: React.FC = () => {
                 max={20}
                 value={dailyGoal}
                 onChange={(e) => setDailyGoal(Number(e.target.value))}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs font-mono focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2 rounded-xl border border-[#E8D5B5] dark:border-[#3D352F] bg-[#FFF9EF] dark:bg-[#201B18] text-xs font-mono text-[#201B18] dark:text-[#FFF9EF] focus:ring-2 focus:ring-[#C66A18] focus:outline-none"
               />
             </div>
           </div>
@@ -175,7 +174,7 @@ export const ProfilePage: React.FC = () => {
             <div>
               <label
                 htmlFor="profile-primary-goal"
-                className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1"
+                className="block text-xs font-serif font-semibold text-[#722F37] dark:text-[#E8D5B5] mb-1"
               >
                 Primary Goal
               </label>
@@ -183,7 +182,7 @@ export const ProfilePage: React.FC = () => {
                 id="profile-primary-goal"
                 value={goal}
                 onChange={(e) => setGoal(e.target.value as any)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E8D5B5] dark:border-[#3D352F] bg-[#FFF9EF] dark:bg-[#201B18] text-xs text-[#201B18] dark:text-[#FFF9EF] focus:ring-2 focus:ring-[#C66A18] focus:outline-none"
               >
                 <option value="interview-prep">Interview Preparation</option>
                 <option value="pronunciation">Pronunciation & Articulation</option>
@@ -195,7 +194,7 @@ export const ProfilePage: React.FC = () => {
             <div>
               <label
                 htmlFor="profile-proficiency"
-                className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1"
+                className="block text-xs font-serif font-semibold text-[#722F37] dark:text-[#E8D5B5] mb-1"
               >
                 Self-Rated Proficiency
               </label>
@@ -203,7 +202,7 @@ export const ProfilePage: React.FC = () => {
                 id="profile-proficiency"
                 value={proficiency}
                 onChange={(e) => setProficiency(e.target.value as any)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E8D5B5] dark:border-[#3D352F] bg-[#FFF9EF] dark:bg-[#201B18] text-xs text-[#201B18] dark:text-[#FFF9EF] focus:ring-2 focus:ring-[#C66A18] focus:outline-none"
               >
                 <option value="beginner">Beginner</option>
                 <option value="intermediate">Intermediate</option>
@@ -214,7 +213,7 @@ export const ProfilePage: React.FC = () => {
             <div>
               <label
                 htmlFor="profile-focus-area"
-                className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1"
+                className="block text-xs font-serif font-semibold text-[#722F37] dark:text-[#E8D5B5] mb-1"
               >
                 Focus Improvement Area
               </label>
@@ -222,7 +221,7 @@ export const ProfilePage: React.FC = () => {
                 id="profile-focus-area"
                 value={area}
                 onChange={(e) => setArea(e.target.value as any)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E8D5B5] dark:border-[#3D352F] bg-[#FFF9EF] dark:bg-[#201B18] text-xs text-[#201B18] dark:text-[#FFF9EF] focus:ring-2 focus:ring-[#C66A18] focus:outline-none"
               >
                 <option value="clarity">Articulation & Diction</option>
                 <option value="speed-control">Pacing & Speed Control</option>
@@ -241,10 +240,10 @@ export const ProfilePage: React.FC = () => {
       </Card>
 
       {/* Hardware, Speech & Privacy Preferences */}
-      <Card padding="lg" className="border-slate-200 dark:border-slate-800 space-y-6">
-        <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
-          <Shield className="w-5 h-5 text-indigo-500" />
-          <h2 className="text-base font-bold text-slate-900 dark:text-white">
+      <Card padding="lg" className="border-[#E8D5B5] dark:border-[#3D352F] space-y-6">
+        <div className="flex items-center gap-2 pb-3 border-b border-[#E8D5B5]/60 dark:border-[#3D352F]">
+          <Shield className="w-5 h-5 text-[#C66A18] dark:text-[#E68A24]" />
+          <h2 className="text-base font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
             Speech Recognition, Audio & Unlock Controls
           </h2>
         </div>
@@ -253,12 +252,12 @@ export const ProfilePage: React.FC = () => {
           {/* Transcription Consent Toggle */}
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-0.5">
-              <span className="font-bold text-slate-900 dark:text-white">
+              <span className="font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
                 Live Speech-to-Text Transcription
               </span>
-              <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
+              <p className="text-[#722F37]/80 dark:text-[#E8D5B5]/80 leading-relaxed">
                 Uses the browser's Web Speech API. Audio is processed by browser vendor servers (Google/Microsoft).
-                Turn off to practice completely offline without remote transcription.
+                Turn off to practice completely offline with mindful self-review fallback.
               </p>
             </div>
             <button
@@ -277,7 +276,7 @@ export const ProfilePage: React.FC = () => {
                 );
               }}
               className={`w-11 h-6 rounded-full transition-colors relative shrink-0 p-0.5 ${
-                !settings.practiceWithoutTranscription ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-700'
+                !settings.practiceWithoutTranscription ? 'bg-[#C66A18]' : 'bg-[#E8D5B5] dark:bg-[#3D352F]'
               }`}
             >
               <span
@@ -289,12 +288,12 @@ export const ProfilePage: React.FC = () => {
           </div>
 
           {/* Local Device Audio Recording Opt-In */}
-          <div className="flex items-start justify-between gap-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex items-start justify-between gap-4 pt-3 border-t border-[#E8D5B5]/60 dark:border-[#3D352F]">
             <div className="space-y-0.5">
-              <span className="font-bold text-slate-900 dark:text-white">
+              <span className="font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
                 Save Practice Audio Locally on This Device (IndexedDB)
               </span>
-              <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
+              <p className="text-[#722F37]/80 dark:text-[#E8D5B5]/80 leading-relaxed">
                 Privacy default is OFF (audio stays in temporary memory and is discarded when you leave).
                 Enable this to preserve audio blobs in your local browser IndexedDB for retrospective playback.
               </p>
@@ -311,7 +310,7 @@ export const ProfilePage: React.FC = () => {
                 );
               }}
               className={`w-11 h-6 rounded-full transition-colors relative shrink-0 p-0.5 ${
-                settings.saveAudioPreference ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-700'
+                settings.saveAudioPreference ? 'bg-[#C66A18]' : 'bg-[#E8D5B5] dark:bg-[#3D352F]'
               }`}
             >
               <span
@@ -323,13 +322,13 @@ export const ProfilePage: React.FC = () => {
           </div>
 
           {/* All Modules Unlocked Notice */}
-          <div className="flex items-start justify-between gap-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex items-start justify-between gap-4 pt-3 border-t border-[#E8D5B5]/60 dark:border-[#3D352F]">
             <div className="space-y-0.5">
-              <span className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <span className="font-serif font-bold text-[#201B18] dark:text-[#FFF9EF] flex items-center gap-2">
                 <span>All Alphabet Modules & Levels Unlocked</span>
-                <span className="text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 px-2 py-0.5 rounded-full font-semibold">Active</span>
+                <span className="text-[10px] bg-[#77764B]/20 text-[#77764B] dark:text-[#D4AF65] border border-[#77764B]/30 px-2 py-0.5 rounded-full font-semibold">Active</span>
               </span>
-              <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
+              <p className="text-[#722F37]/80 dark:text-[#E8D5B5]/80 leading-relaxed">
                 All 26 letters and all 3 difficulty tiers (Beginner, Intermediate, Advanced) are fully open.
                 You can practice any exercise at any time without sequence locks or repetition requirements.
               </p>
@@ -337,16 +336,16 @@ export const ProfilePage: React.FC = () => {
           </div>
 
           {/* Default Playback Speed */}
-          <div className="flex items-center justify-between gap-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex items-center justify-between gap-4 pt-3 border-t border-[#E8D5B5]/60 dark:border-[#3D352F]">
             <div>
-              <span className="font-bold text-slate-900 dark:text-white">
+              <span className="font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
                 Reference Audio Speed (TTS)
               </span>
-              <p className="text-slate-500 dark:text-slate-400">
+              <p className="text-[#722F37]/80 dark:text-[#E8D5B5]/80">
                 Default speed when listening to model pronunciation.
               </p>
             </div>
-            <div className="inline-flex rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-850 p-1">
+            <div className="inline-flex rounded-xl border border-[#E8D5B5] dark:border-[#3D352F] bg-[#F5EBDD] dark:bg-[#28211D] p-1">
               {[0.6, 0.8, 1.0].map((spd) => (
                 <button
                   key={spd}
@@ -354,8 +353,8 @@ export const ProfilePage: React.FC = () => {
                   onClick={() => updateSettings({ playbackSpeed: spd })}
                   className={`px-2.5 py-1 text-xs font-mono rounded-lg transition-colors ${
                     settings.playbackSpeed === spd
-                      ? 'bg-indigo-600 text-white font-bold'
-                      : 'text-slate-600 dark:text-slate-300'
+                      ? 'bg-[#C66A18] text-white font-bold'
+                      : 'text-[#201B18] dark:text-[#FFF9EF]'
                   }`}
                 >
                   {spd}x
@@ -367,11 +366,11 @@ export const ProfilePage: React.FC = () => {
       </Card>
 
       {/* Backup, Import & Factory Reset */}
-      <Card padding="lg" className="border-slate-200 dark:border-slate-800 space-y-4">
-        <h2 className="text-base font-bold text-slate-900 dark:text-white">
+      <Card padding="lg" className="border-[#E8D5B5] dark:border-[#3D352F] space-y-4">
+        <h2 className="text-base font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
           Data Backup & Management
         </h2>
-        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+        <p className="text-xs text-[#722F37]/80 dark:text-[#E8D5B5]/80 leading-relaxed">
           Export your complete Speaking history, streak, XP, and ratings as JSON to move to another browser,
           or reset everything back to fresh defaults.
         </p>
@@ -382,7 +381,7 @@ export const ProfilePage: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={handleExport}
-            icon={<Download className="w-4 h-4 text-indigo-500" />}
+            icon={<Download className="w-4 h-4 text-[#C66A18]" />}
           >
             Export Progress (JSON)
           </Button>
@@ -409,8 +408,8 @@ export const ProfilePage: React.FC = () => {
             variant="ghost"
             size="sm"
             onClick={() => setShowResetModal(true)}
-            icon={<RotateCcw className="w-4 h-4 text-rose-500" />}
-            className="text-rose-600 dark:text-rose-400 ml-auto"
+            icon={<RotateCcw className="w-4 h-4 text-[#C64B32]" />}
+            className="text-[#C64B32] ml-auto"
           >
             Reset All Data
           </Button>
@@ -420,7 +419,7 @@ export const ProfilePage: React.FC = () => {
       {/* Reset Confirmation Modal */}
       <ConfirmModal
         isOpen={showResetModal}
-        title="Reset All SpeakLab Data"
+        title="Reset All speakingClub Data"
         message="This will permanently delete all your practice attempts, XP, streak, interview responses, and audio recordings from this browser. This cannot be undone. Are you sure?"
         confirmLabel="Reset Everything"
         isDestructive

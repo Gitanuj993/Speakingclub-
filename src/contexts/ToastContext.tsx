@@ -84,17 +84,17 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       >
         {toasts.map((toast) => {
           const icons = {
-            success: <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />,
-            error: <AlertCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />,
-            warning: <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />,
-            info: <Info className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />,
+            success: <CheckCircle2 className="w-5 h-5 text-[#77764B] dark:text-[#D4AF65] shrink-0 mt-0.5" />,
+            error: <AlertCircle className="w-5 h-5 text-[#C64B32] shrink-0 mt-0.5" />,
+            warning: <AlertTriangle className="w-5 h-5 text-[#E68A24] shrink-0 mt-0.5" />,
+            info: <Info className="w-5 h-5 text-[#C66A18] dark:text-[#D4AF65] shrink-0 mt-0.5" />,
           };
 
           const borderColors = {
-            success: 'border-emerald-500/20 bg-emerald-50/90 dark:bg-emerald-950/80',
-            error: 'border-rose-500/20 bg-rose-50/90 dark:bg-rose-950/80',
-            warning: 'border-amber-500/20 bg-amber-50/90 dark:bg-amber-950/80',
-            info: 'border-indigo-500/20 bg-indigo-50/90 dark:bg-indigo-950/80',
+            success: 'border-[#77764B]/35 bg-[#F4F5E6] dark:bg-[#201B18] shadow-sm',
+            error: 'border-[#C64B32]/35 bg-[#FBECE9] dark:bg-[#201B18] shadow-sm',
+            warning: 'border-[#E68A24]/35 bg-[#FFF5E6] dark:bg-[#201B18] shadow-sm',
+            info: 'border-[#D4AF65]/50 bg-[#FFF0DF] dark:bg-[#201B18] shadow-sm',
           };
 
           return (
@@ -105,11 +105,11 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             >
               {icons[toast.type]}
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                <p className="text-sm font-bold text-[#201B18] dark:text-[#FFF9EF] font-serif">
                   {toast.title}
                 </p>
                 {toast.message && (
-                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 leading-relaxed">
+                  <p className="text-xs text-[#6B5E55] dark:text-[#E8D5B5] mt-0.5 leading-relaxed">
                     {toast.message}
                   </p>
                 )}

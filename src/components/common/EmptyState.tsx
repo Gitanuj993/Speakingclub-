@@ -26,15 +26,15 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center justify-center text-center p-8 sm:p-12 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-white/40 dark:bg-slate-900/40 ${className}`}
+      className={`flex flex-col items-center justify-center text-center p-8 sm:p-12 border border-dashed border-[#D4AF65]/40 rounded-2xl bg-[#F5EBDD]/40 dark:bg-[#201B18]/60 ${className}`}
     >
-      <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+      <div className="w-12 h-12 rounded-2xl bg-[#FFF0DF] dark:bg-[#C66A18]/20 text-[#C66A18] dark:text-[#E68A24] border border-[#E68A24]/20 flex items-center justify-center mb-4 shadow-xs">
         {icon || <FolderOpen className="w-6 h-6" />}
       </div>
-      <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+      <h3 className="text-base font-bold text-[#201B18] dark:text-[#FFF9EF] font-serif">
         {title}
       </h3>
-      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5 max-w-sm">
+      <p className="text-xs text-[#6B5E55] dark:text-[#E8D5B5] mt-1.5 max-w-sm leading-relaxed">
         {description}
       </p>
       {actionLabel && onAction && (
@@ -64,15 +64,15 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
   return (
     <div
       role="alert"
-      className={`flex flex-col items-center justify-center text-center p-6 sm:p-8 border border-rose-200 dark:border-rose-900/40 rounded-2xl bg-rose-50/50 dark:bg-rose-950/20 ${className}`}
+      className={`flex flex-col items-center justify-center text-center p-6 sm:p-8 border border-[#C64B32]/30 rounded-2xl bg-[#FBECE9]/70 dark:bg-[#C64B32]/10 ${className}`}
     >
-      <div className="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-3">
+      <div className="w-10 h-10 rounded-xl bg-[#FBECE9] dark:bg-[#C64B32]/30 text-[#C64B32] flex items-center justify-center mb-3">
         <AlertCircle className="w-5 h-5" />
       </div>
-      <h3 className="text-sm font-semibold text-rose-900 dark:text-rose-200">
+      <h3 className="text-sm font-semibold text-[#C64B32] dark:text-[#E88C78]">
         {title}
       </h3>
-      <p className="text-xs text-rose-700 dark:text-rose-300 mt-1 max-w-sm">
+      <p className="text-xs text-[#6B5E55] dark:text-[#E8D5B5] mt-1 max-w-sm">
         {message}
       </p>
       {onRetry && (
@@ -80,7 +80,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
           onClick={onRetry}
           variant="outline"
           size="sm"
-          className="mt-4 border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 hover:bg-rose-100/50"
+          className="mt-4 border-[#C64B32]/50 text-[#C64B32] hover:bg-[#FBECE9]"
         >
           {retryLabel}
         </Button>
@@ -97,7 +97,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({ className = 'h-4 w-full' }) 
   return (
     <div
       aria-hidden="true"
-      className={`animate-pulse bg-slate-200 dark:bg-slate-800 rounded-lg ${className}`}
+      className={`animate-pulse bg-[#E8D5B5]/60 dark:bg-[#342D28] rounded-lg ${className}`}
     />
   );
 };

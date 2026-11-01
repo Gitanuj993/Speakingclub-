@@ -28,7 +28,7 @@ export const Tabs: React.FC<TabsProps> = ({
   return (
     <div
       role="tablist"
-      className={`flex items-center gap-1.5 p-1 bg-slate-100/80 dark:bg-slate-800/80 rounded-xl overflow-x-auto no-scrollbar ${className}`}
+      className={`flex items-center gap-1.5 p-1.5 bg-[#F5EBDD]/90 dark:bg-[#2A2420] border border-[#E8D5B5] dark:border-[#3D352F] rounded-xl overflow-x-auto no-scrollbar ${className}`}
     >
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
@@ -39,20 +39,20 @@ export const Tabs: React.FC<TabsProps> = ({
             aria-selected={isActive}
             aria-controls={`tabpanel-${tab.id}`}
             onClick={() => onChange(tab.id)}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all duration-150 whitespace-nowrap min-h-[38px] ${
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all duration-200 whitespace-nowrap min-h-[38px] ${
               isActive
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm font-semibold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                ? 'bg-[#FFF9EF] dark:bg-[#201B18] text-[#C66A18] dark:text-[#D4AF65] border border-[#D4AF65]/40 shadow-xs font-bold'
+                : 'text-[#6B5E55] dark:text-[#B8A89A] hover:text-[#201B18] dark:hover:text-[#FFF9EF]'
             }`}
           >
             {tab.icon && <span className="shrink-0">{tab.icon}</span>}
             <span>{tab.label}</span>
             {tab.count !== undefined && (
               <span
-                className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
                   isActive
-                    ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300'
-                    : 'bg-slate-200/60 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
+                    ? 'bg-[#FFF0DF] text-[#C66A18] dark:bg-[#C66A18]/25 dark:text-[#E68A24]'
+                    : 'bg-[#E8D5B5]/60 dark:bg-[#342D28] text-[#6B5E55] dark:text-[#B8A89A]'
                 }`}
               >
                 {tab.count}

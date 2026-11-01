@@ -23,11 +23,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const hideNavigationChrome = isLanding || isOnboarding;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+    <div className="min-h-screen flex flex-col bg-[#FFF9EF] dark:bg-[#201B18] text-[#201B18] dark:text-[#FFF9EF] transition-colors">
       {/* Accessible skip link */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-indigo-600 text-white rounded-xl shadow-lg text-sm font-semibold focus:outline-none"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-gradient-to-r from-[#E68A24] to-[#C66A18] text-white rounded-xl shadow-lg text-sm font-semibold focus:outline-none"
       >
         Skip to main content
       </a>

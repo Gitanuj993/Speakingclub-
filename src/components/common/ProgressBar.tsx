@@ -10,7 +10,7 @@ export interface ProgressBarProps {
   max?: number;
   label?: string;
   showPercent?: boolean;
-  color?: 'indigo' | 'emerald' | 'amber' | 'rose';
+  color?: 'indigo' | 'emerald' | 'amber' | 'rose' | 'kesari' | 'gold';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -20,7 +20,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   max = 100,
   label,
   showPercent = false,
-  color = 'indigo',
+  color = 'kesari',
   size = 'md',
   className = '',
 }) => {
@@ -33,16 +33,18 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   };
 
   const colorStyles = {
-    indigo: 'bg-indigo-600 dark:bg-indigo-500',
-    emerald: 'bg-emerald-600 dark:bg-emerald-500',
-    amber: 'bg-amber-500 dark:bg-amber-400',
-    rose: 'bg-rose-600 dark:bg-rose-500',
+    kesari: 'bg-gradient-to-r from-[#E68A24] to-[#C66A18]',
+    gold: 'bg-gradient-to-r from-[#D4AF65] to-[#B08930]',
+    indigo: 'bg-gradient-to-r from-[#E68A24] to-[#C66A18]', // gracefully map legacy prop to kesari
+    emerald: 'bg-gradient-to-r from-[#77764B] to-[#595831]',
+    amber: 'bg-gradient-to-r from-[#E68A24] to-[#D4AF65]',
+    rose: 'bg-gradient-to-r from-[#C64B32] to-[#722F37]',
   };
 
   return (
     <div className={`w-full ${className}`}>
       {(label || showPercent) && (
-        <div className="flex justify-between items-center mb-1.5 text-xs text-slate-600 dark:text-slate-400">
+        <div className="flex justify-between items-center mb-1.5 text-xs text-[#6B5E55] dark:text-[#E8D5B5]">
           {label && <span className="font-medium">{label}</span>}
           {showPercent && <span className="font-mono">{percentage}%</span>}
         </div>
@@ -53,7 +55,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={label || 'Progress'}
-        className={`w-full bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden ${sizeStyles[size]}`}
+        className={`w-full bg-[#E8D5B5]/50 dark:bg-[#342D28] rounded-full overflow-hidden ${sizeStyles[size]}`}
       >
         <div
           className={`h-full transition-all duration-300 ease-out rounded-full ${colorStyles[color]}`}
@@ -77,7 +79,7 @@ export const ProgressRing: React.FC<ProgressRingProps> = ({
   value,
   size = 72,
   strokeWidth = 6,
-  color = '#6366f1',
+  color = '#E68A24',
   backgroundColor = 'currentColor',
   children,
 }) => {
@@ -101,7 +103,7 @@ export const ProgressRing: React.FC<ProgressRingProps> = ({
           cy={size / 2}
           r={radius}
           strokeWidth={strokeWidth}
-          className="text-slate-200 dark:text-slate-800"
+          className="text-[#E8D5B5]/50 dark:text-[#342D28]"
           stroke={backgroundColor === 'currentColor' ? undefined : backgroundColor}
           fill="transparent"
         />

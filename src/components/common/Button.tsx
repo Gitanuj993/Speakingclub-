@@ -29,25 +29,25 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'inline-flex items-center justify-center font-medium transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none select-none cursor-pointer rounded-xl active:scale-[0.98] min-h-[44px]';
+    'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none select-none cursor-pointer rounded-xl active:scale-[0.98] min-h-[44px]';
 
   const sizeStyles = {
-    sm: 'text-xs px-3 py-1.5 gap-1.5 min-h-[38px]',
-    md: 'text-sm px-4 py-2 gap-2 min-h-[44px]',
+    sm: 'text-xs px-3.5 py-1.5 gap-1.5 min-h-[38px]',
+    md: 'text-sm px-4.5 py-2 gap-2 min-h-[44px]',
     lg: 'text-base px-6 py-3 gap-2.5 min-h-[48px]',
   };
 
   const variantStyles = {
     primary:
-      'bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white shadow-sm shadow-indigo-500/20 focus-visible:ring-indigo-500',
+      'bg-gradient-to-r from-[#E68A24] via-[#DE7D1C] to-[#C66A18] hover:from-[#DE7D1C] hover:to-[#B55D12] text-white font-semibold shadow-sm shadow-[#E68A24]/30 border border-[#D4AF65]/35 focus-visible:ring-[#E68A24]',
     secondary:
-      'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 focus-visible:ring-slate-400',
+      'bg-[#F5EBDD] hover:bg-[#E8D5B5] dark:bg-[#2A2420] dark:hover:bg-[#342D28] text-[#201B18] dark:text-[#FFF9EF] border border-[#E8D5B5] dark:border-[#3D352F] shadow-xs focus-visible:ring-[#D4AF65]',
     ghost:
-      'bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus-visible:ring-slate-400',
+      'bg-transparent hover:bg-[#F5EBDD]/70 dark:hover:bg-[#2A2420] text-[#6B5E55] dark:text-[#D4AF65] hover:text-[#201B18] dark:hover:text-[#FFF9EF] focus-visible:ring-[#D4AF65]',
     danger:
-      'bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white shadow-sm shadow-rose-500/20 focus-visible:ring-rose-500',
+      'bg-[#C64B32] hover:bg-[#A93C25] text-white shadow-sm shadow-[#C64B32]/30 border border-[#C64B32]/50 focus-visible:ring-[#C64B32]',
     outline:
-      'bg-transparent border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 focus-visible:ring-slate-400',
+      'bg-transparent border border-[#D4AF65]/70 dark:border-[#D4AF65]/40 hover:bg-[#F5EBDD]/60 dark:hover:bg-[#2A2420] text-[#C66A18] dark:text-[#D4AF65] font-medium focus-visible:ring-[#D4AF65]',
   };
 
   return (

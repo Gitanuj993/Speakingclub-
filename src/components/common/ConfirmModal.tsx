@@ -52,11 +52,11 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
     >
       <div className="flex items-start gap-3 py-1">
         {isDestructive && (
-          <div className="w-8 h-8 rounded-full bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
+          <div className="w-8 h-8 rounded-full bg-[#FBECE9] dark:bg-[#C64B32]/25 text-[#C64B32] flex items-center justify-center shrink-0">
             <AlertTriangle className="w-4 h-4" />
           </div>
         )}
-        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+        <p className="text-xs text-[#6B5E55] dark:text-[#E8D5B5] leading-relaxed">
           {message}
         </p>
       </div>

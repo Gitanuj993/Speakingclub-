@@ -113,8 +113,8 @@ export const LessonPlayerPage: React.FC = () => {
   if (!exercise) {
     return (
       <div className="p-8 text-center max-w-md mx-auto">
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white">Exercise Not Found</h2>
-        <p className="text-xs text-slate-500 mt-1">
+        <h2 className="text-lg font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">Drill Not Found</h2>
+        <p className="text-xs text-[#722F37] dark:text-[#E8D5B5] mt-1">
           This drill ID does not exist or may have been updated.
         </p>
         <Link to="/learn" className="mt-4 inline-block">
@@ -158,92 +158,78 @@ export const LessonPlayerPage: React.FC = () => {
       if (durationMs < minDuration) {
         warning(
           'Recording too short',
-          'A valid repetition should be at least 1.5 seconds long.'
+          'A valid practice repetition requires at least 1.5 seconds of vocalization.'
         );
         return;
       }
 
-      let matchPercent = 0;
-      let diffData: any[] = [];
-
-      if (shouldRunRecognition && transcript.trim()) {
+      // Check alignment if transcription was enabled
+      if (shouldRunRecognition && transcript) {
         const alignResult = alignWords(exercise.text, transcript);
-        matchPercent = alignResult.matchPercent;
-        diffData = alignResult.diff;
-      }
+        setLastSpeechResult({
+          transcript,
+          matchPercent: alignResult.matchPercent,
+          diff: alignResult.diff,
+        });
 
-      const wordCount = exercise.text.split(/\s+/).length;
-      const wpm = calculateWpm(wordCount, durationMs);
-      const fillers = detectFillerWords(transcript);
-
-      const result = {
-        transcript,
-        matchPercent,
-        diff: diffData,
-        wpm,
-        durationMs,
-        fillers,
-        audioBlob,
-      };
-
-      // Set speech result
-      setLastSpeechResult(result);
-
-      // Increment completed repetitions on recording - no restriction requiring multiple runs
-      setCompletedReps((prev) => prev + 1);
-
-      if (shouldRunRecognition) {
-        if (matchPercent >= 50) {
-          info('Repetition Recorded!', `Match: ${matchPercent}% • Pace: ${wpm} WPM`);
-        } else {
-          info(
-            'Repetition Recorded!',
-            `Transcription matched ${matchPercent}%. You can review, try again, or finish now.`
-          );
-        }
+        // Any attempt counts towards user practice
+        setCompletedReps((prev) => prev + 1);
+        setIsSelfCheckConfirmed(true);
       } else {
-        info('Repetition Recorded!', `Pace: ${wpm} WPM. Ready to review or finish.`);
+        // Fallback or transcription-disabled practice: prompt self check
+        setLastSpeechResult({
+          transcript: '',
+          matchPercent: null,
+          diff: [],
+        });
+        setCompletedReps((prev) => prev + 1);
+        setIsSelfCheckConfirmed(true);
       }
     }
   }, [recorderState, audioBlob, durationMs]);
 
-  // Self-check confirmation for practice without transcription
+  // Handle self-repetition confirmation when user practices offline
   const handleConfirmSelfRepetition = () => {
-    setCompletedReps((prev) => prev + 1);
     setIsSelfCheckConfirmed(true);
-    info('Repetition Confirmed', 'Great job! You can view results or practice again.');
+    setCompletedReps((prev) => prev + 1);
+    info('Repetition Added', `Practice repetition recorded.`);
   };
 
-  // Final completion & saving attempt
+  // Finalize and save exercise attempt
   const handleCompleteLesson = async () => {
-    if (isSubmitting) return;
-    setIsSubmitting(true);
+    if (!audioBlob) {
+      warning('Audio Needed', 'Please record at least one practice attempt first.');
+      return;
+    }
 
+    setIsSubmitting(true);
     try {
-      const wpm = lastSpeechResult?.wpm || calculateWpm(exercise.text.split(/\s+/).length, durationMs || 3000);
-      const match = lastSpeechResult?.matchPercent;
+      const wordCount = exercise.text.split(/\s+/).length;
+      const calculatedWpm = calculateWpm(wordCount, durationMs);
+      const recognizedText = lastSpeechResult?.transcript || transcript || '';
+      const fillerResult = detectFillerWords(recognizedText);
 
       await saveExerciseAttempt(
         {
           exerciseId: exercise.id,
-          moduleId: exercise.moduleId,
-          category: exercise.category,
+          moduleId: exercise.moduleId || '',
           level: exercise.level,
-          durationMs: durationMs || 3000,
-          wpm,
-          repetitionsCompleted: Math.max(1, completedReps),
-          matchPercent: match,
-          transcript: lastSpeechResult?.transcript || transcript,
+          category: exercise.category,
+          wpm: calculatedWpm,
+          durationMs,
+          repetitionsCompleted: completedReps || 1,
+          matchPercent: lastSpeechResult?.matchPercent ?? undefined,
+          transcript: recognizedText,
         },
         audioBlob || undefined
       );
 
       navigate(`/lesson/${exercise.id}/results`, {
         state: {
-          exercise,
-          speechResult: lastSpeechResult,
+          wpm: calculatedWpm,
           durationMs,
-          wpm,
+          speechResult: lastSpeechResult,
+          exerciseId: exercise.id,
         },
       });
     } catch (err: any) {
@@ -252,7 +238,7 @@ export const LessonPlayerPage: React.FC = () => {
     }
   };
 
-  // All exercises are immediately available and can be completed after 1 repetition or anytime recorded
+  // All exercises are unlocked and available to complete with 1 repetition
   const canComplete = completedReps >= 1 || audioUrl !== null || audioBlob !== null;
 
   return (
@@ -263,17 +249,17 @@ export const LessonPlayerPage: React.FC = () => {
           <div className="flex items-center gap-3">
             <Link
               to={moduleInfo ? '/learn/alphabet' : '/learn'}
-              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+              className="flex items-center gap-1.5 text-xs font-serif text-[#722F37] hover:text-[#C66A18] dark:text-[#E8D5B5] dark:hover:text-[#E68A24] transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Path</span>
             </Link>
             {nextExercise && (
               <>
-                <span className="text-slate-300 dark:text-slate-700">•</span>
+                <span className="text-[#D4AF65]">•</span>
                 <Link
                   to={`/lesson/${nextExercise.id}`}
-                  className="flex items-center gap-1 text-xs text-indigo-600 dark:text-indigo-400 hover:underline"
+                  className="flex items-center gap-1 text-xs font-serif text-[#C66A18] dark:text-[#E68A24] hover:underline"
                 >
                   <span>Next Drill</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -289,10 +275,10 @@ export const LessonPlayerPage: React.FC = () => {
             <Badge
               variant={
                 exercise.level === 'beginner'
-                  ? 'primary'
+                  ? 'gold'
                   : exercise.level === 'intermediate'
                   ? 'warning'
-                  : 'danger'
+                  : 'maroon'
               }
               size="sm"
               className="capitalize"
@@ -303,23 +289,23 @@ export const LessonPlayerPage: React.FC = () => {
         </div>
 
         {/* Drill Title & Repetition Counter */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-slate-200/80 dark:border-slate-800">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-[#E8D5B5]/60 dark:border-[#3D352F]">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+            <h1 className="text-xl sm:text-2xl font-serif font-bold text-[#201B18] dark:text-[#FFF9EF]">
               {exercise.title}
             </h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Objective: <span className="text-slate-700 dark:text-slate-300">{exercise.objective}</span>
+            <p className="text-xs text-[#722F37]/80 dark:text-[#E8D5B5]/80 mt-1">
+              Objective: <span className="text-[#201B18] dark:text-[#FFF9EF] font-medium">{exercise.objective}</span>
             </p>
           </div>
 
-          <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2 self-start sm:self-auto shadow-xs">
-            <span className="text-xs text-slate-500 font-medium">Practice Reps:</span>
-            <div className="flex items-center gap-1 font-mono font-bold text-sm text-slate-900 dark:text-white">
-              <span className={completedReps > 0 ? 'text-emerald-600 dark:text-emerald-400' : ''}>
+          <div className="flex items-center gap-2 bg-[#FFF9EF] dark:bg-[#201B18] border border-[#E8D5B5] dark:border-[#3D352F] rounded-xl px-3.5 py-2 self-start sm:self-auto shadow-xs">
+            <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">Practice Reps:</span>
+            <div className="flex items-center gap-1 font-mono font-bold text-sm text-[#201B18] dark:text-[#FFF9EF]">
+              <span className={completedReps > 0 ? 'text-[#77764B] dark:text-[#D4AF65]' : ''}>
                 {completedReps}
               </span>
-              <span className="text-xs font-normal text-slate-400">done</span>
+              <span className="text-xs font-normal text-[#722F37] dark:text-[#E8D5B5]">done</span>
             </div>
           </div>
         </div>
@@ -329,53 +315,53 @@ export const LessonPlayerPage: React.FC = () => {
       <div className="my-8 sm:my-10 space-y-6">
         <Card
           padding="lg"
-          className="shadow-md border-indigo-100 dark:border-indigo-950/60 bg-white dark:bg-slate-900 text-center relative overflow-hidden"
+          className="shadow-md border-[#D4AF65]/50 dark:border-[#D4AF65]/30 bg-gradient-to-b from-[#FFF9EF] to-[#F5EBDD] dark:from-[#201B18] dark:to-[#28211D] text-center relative overflow-hidden"
         >
           {/* Target sound indicator */}
           <div className="flex justify-center mb-4">
-            <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-900">
+            <span className="inline-flex items-center gap-1.5 text-xs font-serif font-semibold px-3 py-1 rounded-full bg-[#E8D5B5]/60 dark:bg-[#C66A18]/20 text-[#C66A18] dark:text-[#E68A24] border border-[#D4AF65]/40">
               <Sparkles className="w-3.5 h-3.5" />
-              Target: {exercise.targetSounds.join(', ')}
+              Target Sound: {exercise.targetSounds.join(', ')}
             </span>
           </div>
 
           {/* Drill text */}
-          <p className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-relaxed max-w-2xl mx-auto py-4 select-text">
+          <p className="text-2xl sm:text-4xl font-serif font-bold tracking-tight text-[#201B18] dark:text-[#FFF9EF] leading-relaxed max-w-2xl mx-auto py-4 select-text">
             {exercise.text}
           </p>
 
           {/* Tip */}
-          <div className="flex items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-850">
-            <Info className="w-4 h-4 text-indigo-500 shrink-0" />
+          <div className="flex items-center justify-center gap-2 text-xs text-[#722F37] dark:text-[#E8D5B5] pt-3 border-t border-[#E8D5B5]/60 dark:border-[#3D352F]">
+            <Info className="w-4 h-4 text-[#C66A18] dark:text-[#E68A24] shrink-0" />
             <span>Articulation Tip: {exercise.tip}</span>
           </div>
         </Card>
 
         {/* Reference Audio Player with Speed Control */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-slate-100/70 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-[#F5EBDD]/70 dark:bg-[#28211D] border border-[#E8D5B5] dark:border-[#3D352F]">
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => (isSpeaking ? stopTts() : speak(exercise.text))}
               disabled={!ttsSupported}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-xs font-semibold shadow-xs hover:bg-slate-50 dark:hover:bg-slate-750 transition-colors border border-slate-200 dark:border-slate-700 min-h-[38px]"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#FFF9EF] dark:bg-[#201B18] text-[#201B18] dark:text-[#FFF9EF] text-xs font-serif font-semibold shadow-xs hover:bg-[#E8D5B5]/30 transition-colors border border-[#E8D5B5] dark:border-[#3D352F] min-h-[38px]"
             >
               {isSpeaking ? (
                 <>
-                  <Pause className="w-3.5 h-3.5 text-indigo-600 fill-indigo-600" />
+                  <Pause className="w-3.5 h-3.5 text-[#C66A18] fill-[#C66A18]" />
                   <span>Pause Model</span>
                 </>
               ) : (
                 <>
-                  <Volume2 className="w-3.5 h-3.5 text-indigo-600" />
+                  <Volume2 className="w-3.5 h-3.5 text-[#C66A18]" />
                   <span>Listen to Model</span>
                 </>
               )}
             </button>
-            <span className="text-xs text-slate-500">
+            <span className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">
               Speed:
             </span>
-            <div className="inline-flex rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-0.5">
+            <div className="inline-flex rounded-lg border border-[#E8D5B5] dark:border-[#3D352F] bg-[#FFF9EF] dark:bg-[#201B18] p-0.5">
               {[0.6, 0.8, 1.0].map((rateOption) => (
                 <button
                   key={rateOption}
@@ -383,8 +369,8 @@ export const LessonPlayerPage: React.FC = () => {
                   onClick={() => setTtsRate(rateOption)}
                   className={`px-2 py-0.5 text-xs font-mono font-medium rounded-md transition-colors ${
                     ttsRate === rateOption
-                      ? 'bg-indigo-600 text-white font-bold'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                      ? 'bg-[#C66A18] text-white font-bold'
+                      : 'text-[#201B18] dark:text-[#FFF9EF] hover:text-[#C66A18]'
                   }`}
                 >
                   {rateOption}x
@@ -393,7 +379,7 @@ export const LessonPlayerPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="text-[11px] text-slate-500 font-mono">
+          <div className="text-[11px] text-[#722F37] dark:text-[#E8D5B5] font-mono">
             {exercise.targetWpmRange
               ? `Target: ${exercise.targetWpmRange[0]}-${exercise.targetWpmRange[1]} WPM`
               : 'Pacing: Controlled & Natural'}
@@ -404,7 +390,7 @@ export const LessonPlayerPage: React.FC = () => {
         {recorderError && (
           <div
             role="alert"
-            className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-xs text-rose-700 dark:text-rose-300"
+            className="p-3 rounded-xl bg-[#C64B32]/10 border border-[#C64B32]/30 text-xs text-[#C64B32]"
           >
             {recorderError}
           </div>
@@ -412,16 +398,16 @@ export const LessonPlayerPage: React.FC = () => {
       </div>
 
       {/* Bottom Practice Controls */}
-      <div className="pt-6 border-t border-slate-200/80 dark:border-slate-800 space-y-4">
+      <div className="pt-6 border-t border-[#E8D5B5]/60 dark:border-[#3D352F] space-y-4">
         {/* Active Recording or Review Toolbar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             {recorderState === 'recording' ? (
               <div
                 aria-live="polite"
-                className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200/80 dark:border-rose-800 text-rose-700 dark:text-rose-300"
+                className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-[#C64B32]/15 border border-[#C64B32]/40 text-[#C64B32]"
               >
-                <span className="w-3 h-3 rounded-full bg-rose-600 animate-ping" />
+                <span className="w-3 h-3 rounded-full bg-[#C64B32] animate-ping" />
                 <span className="text-xs font-bold uppercase tracking-wider">Recording Live</span>
                 <span className="text-xs font-mono font-bold ml-2">{formattedDuration}</span>
               </div>
@@ -463,8 +449,8 @@ export const LessonPlayerPage: React.FC = () => {
                 </Button>
               </div>
             ) : (
-              <div className="text-xs text-slate-500">
-                Press Record and speak clearly into your microphone.
+              <div className="text-xs font-serif text-[#722F37] dark:text-[#E8D5B5]">
+                Press Record and speak clearly with mindful articulation.
               </div>
             )}
           </div>
@@ -501,7 +487,7 @@ export const LessonPlayerPage: React.FC = () => {
                 onClick={handleCompleteLesson}
                 isLoading={isSubmitting}
                 iconRight={<ArrowRight className="w-4 h-4" />}
-                className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20"
+                className="w-full sm:w-auto"
               >
                 View Full Results
               </Button>
@@ -511,10 +497,9 @@ export const LessonPlayerPage: React.FC = () => {
 
         {/* Self check fallback if practice without transcription */}
         {(!shouldRunRecognition || !recognitionSupported) && audioUrl && !isSelfCheckConfirmed && (
-          <div className="p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200/70 dark:border-amber-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div className="text-xs text-amber-900 dark:text-amber-200">
-              <span className="font-bold">Self-Review Fallback:</span> Did you pronounce all words
-              and consonant stops clearly in this repetition?
+          <div className="p-4 rounded-xl bg-[#F5EBDD] dark:bg-[#28211D] border border-[#D4AF65]/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="text-xs text-[#201B18] dark:text-[#FFF9EF]">
+              <span className="font-serif font-bold text-[#C66A18] dark:text-[#E68A24]">आत्मपरीक्षण (Self-Review):</span> Did you articulate all syllables with clarity and calm pacing?
             </div>
             <Button
               size="sm"
